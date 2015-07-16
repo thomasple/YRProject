@@ -11,11 +11,9 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::get('/', function () {
+	return view('welcome');
 });
-
 
 Route::resource('user', 'UserController');
 Route::resource('salon', 'SalonController');

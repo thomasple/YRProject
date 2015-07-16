@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration {
 			$table->string('id_facebook', 100);
 			$table->boolean('admin');
 			$table->boolean('salon_owner');
+			$table->rememberToken();
 		});
 	}
 
