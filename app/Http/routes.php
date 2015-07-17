@@ -23,3 +23,5 @@ Route::resource('artisanservice', 'ArtisanServiceController');
 Route::resource('timeslot', 'TimeSlotController');
 Route::resource('reservation', 'ReservationController');
 Route::resource('holiday', 'HolidayController');
+Route::get('administrator','AdminController@getForm');
+Route::post('administrator','AdminController@postForm');

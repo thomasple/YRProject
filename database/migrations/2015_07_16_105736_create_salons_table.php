@@ -14,7 +14,7 @@ class CreateSalonsTable extends Migration {
 			$table->text('description');
 			$table->text('address');
 			$table->string('main_photo', 255);
-			$table->integer('owner_id')->unsigned();
+			$table->integer('owner_id')->unsigned()->default(NULL);
 		});
 	}
 
