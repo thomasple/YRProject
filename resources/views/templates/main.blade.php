@@ -23,17 +23,37 @@
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="{{ url('/') }}"><div>{!! Html::image('images/YRLogo.png') !!}</div></a>
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <div>{!! Html::image('images/YRLogo.png') !!}</div>
+            </a>
         </div>
         <ul class="nav navbar-nav">
             <li>
                 <a href="{{ url('/') }}">Accueil</a>
             </li>
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+            @if(Auth::user())
+                <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
+            @else
+                <li><a href="{{ url('/auth/register') }}">Sign up</a></li>
+                <li><a href="{{ url('/auth/login') }}">Login <span
+                                class="glyphicon glyphicon glyphicon-hand-right"></span></a></li>
+            @endif
+        </ul>
     </div>
 </nav>
+
+@if(!Auth::user())
+    <div class="login_roll"
+         style="background:url('{{asset('images/login_roll.png')}}') no-repeat; background-size: contain;">
+        <a class="btn btn-info btn-lg" role="button" href="{{ url('/auth/login') }}">Login <span
+                    class="glyphicon glyphicon glyphicon-hand-right"></span></a>
+    </div>
+@endif
+
 <section class="body">
-    @yield('body')
+    @yield('content')
 </section>
 </body>
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-	return view('welcome');
-});
+Route::get('/', 'WelcomeController@index');
 
 Route::resource('user', 'UserController');
 Route::resource('salon', 'SalonController');
@@ -23,3 +21,7 @@ Route::resource('artisanservice', 'ArtisanServiceController');
 Route::resource('timeslot', 'TimeSlotController');
 Route::resource('reservation', 'ReservationController');
 Route::resource('holiday', 'HolidayController');
+
+Route::get('confirm', 'ConfirmController@getConfirm');
+Route::post('confirm', 'ConfirmController@postConfirm');
+Route::get('end-session', 'Auth\AuthController@endSession');
