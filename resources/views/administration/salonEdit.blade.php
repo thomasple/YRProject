@@ -9,7 +9,7 @@
         </div>
         <div class="panel-body">
             <div class="col-sm-12">
-                {!! Form::model($salon,['route' =>['salon.update',$salon->id],'method' => 'put']) !!}
+                {!! Form::model($salon,['route' =>['salon.update',$salon->id],'method' => 'put','files' => true]) !!}
                 <div class="form-group {!! $errors->has('name') ? 'has-error' : '' !!}">
                     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name']) !!}
                     {!! $errors->first('name', '<small class="help-block">:message</small>') !!}
@@ -26,7 +26,10 @@
                     {!! Form::text('owner_id', null, ['class' => 'form-control', 'placeholder' => 'Owner_id']) !!}
                     {!! $errors->first('owner_id', '<small class="help-block">:message</small>') !!}
                 </div>
-                {{--rajouter le nom du propriétaire--}}
+                <div class="form-group {!! $errors->has('image') ? 'has-error' : '' !!}">
+                    {!! Form::file('main_photo', ['class' => 'form-control','placeholder'=>'main photo']) !!}
+                    {!! $errors->first('main_photo', '<small class="help-block">:message</small>') !!}
+                </div>
                 {!! Form::submit('Save changes', ['class' => 'btn btn-primary pull-right']) !!}
                 {!! Form::close() !!}
             </div>

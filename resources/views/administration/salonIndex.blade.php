@@ -33,10 +33,10 @@
                         </tr>
                     @endforeach
                 </tbody>
-                {!! link_to_route('salon.create', 'Create new salon', [], ['class' => 'btn btn-info pull-right']) !!}
-                {{--{!! $links !!}--}}
+                {!! $links !!}
             </table>
         </div>
+    {!! link_to_route('salon.create', 'Create new salon', [], ['class' => 'btn btn-info pull-right']) !!}
     {{--</div>--}}
 @stop
 @section('script')

@@ -26,3 +26,4 @@ Route::resource('holiday', 'HolidayController');
 Route::get('administrator','AdminController@getForm');
 Route::post('administrator','AdminController@postForm');
 Route::post('createsalon','SalonController@store');
+Route::get('test',function(){return view('administration/test');});

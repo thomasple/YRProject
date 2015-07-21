@@ -1,7 +1,7 @@
 <?php
 namespace App\Repositories;
 use App\Salon;
-
+use App\User;
 class SalonRepository
 {
     protected $salon;
@@ -21,9 +21,23 @@ class SalonRepository
         {
             $salon->description=$inputs['description'];
         }
-        if(isset($inputs['ownerid']))
+        if(isset($inputs['owner_id']))
         {
-            $salon->owner_id=$inputs['ownerid'];
+            $salon->owner_id=$inputs['owner_id'];
+            //$owner=Salon::find($salon->id)->owner;
+            //$owner
+        }
+        if(isset($inputs['main_photo']))
+        {
+            $image=$inputs['main_photo'];
+            if($image->isValid())
+            {
+                $chemin = config('salonImage.path');
+                $extension = $image->getClientOriginalExtension();
+                $nom = 'photosalon' . $salon->id . '.' . $extension;
+                $image->move($chemin, $nom);
+                $salon->main_photo=$nom;
+            }
         }
         $salon->save();
     }

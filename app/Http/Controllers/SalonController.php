@@ -14,9 +14,9 @@ class SalonController extends Controller
   public function __construct(SalonRepository $salonRepository)
 
   {
-
+    /*$this->middleware('admin');
+    $this->middleware('loggedAsAdmin');*/
     $this->salonRepository = $salonRepository;
-
   }
 
   /**

@@ -14,7 +14,14 @@
             <p>Owner : {{$salon->owner_id}}</p>
             <p>Date of creation : {{$salon->created_at}}</p>
             <p>Last update : {{$salon->updated_at}}</p>
+
         </div>
+        <?php
+        if(isset($salon->main_photo) AND $salon->main_photo!=NULL)
+        {
+            echo '<img src="salonPictures/'.$salon->main_photo.'" alt="photo salon'.$salon->id.'"/>';
+        }
+        ?>
         <a href="javascript:history.back()" class="btn btn-primary">
 
             <span class="glyphicon glyphicon-circle-arrow-left"></span> Back

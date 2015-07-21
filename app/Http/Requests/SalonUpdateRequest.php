@@ -24,10 +24,11 @@ class SalonUpdateRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required|max:100|alpha_num',
+            'name' => 'required|max:100',
             'description' => 'string',
-            'address' => 'required|max:255|string',
+            'address' => 'max:255|string',
             'owner_id'=>'required|integer|max:10',
+            'main_photo'=>'image|max:255'
             //
         ];
     }
