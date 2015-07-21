@@ -146,7 +146,6 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Proengsoft\JsValidation\JsValidationServiceProvider::class,
         Bestmomo\Scafold\ScafoldServiceProvider::class,
-
     ],
 
     /*

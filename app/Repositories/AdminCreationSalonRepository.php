@@ -5,8 +5,8 @@ class AdminCreationSalonRepository implements  AdminCreationSalonRepositoryInter
 {
     public function createSalon($sname)
     {
-        $salon=new Salon;
-        $salon->name=$sname;
+        $salon = new Salon;
+        $salon->name = $sname;
         $salon->save();
     }
 }

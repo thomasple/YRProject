@@ -25,3 +25,4 @@ Route::resource('reservation', 'ReservationController');
 Route::resource('holiday', 'HolidayController');
 Route::get('administrator','AdminController@getForm');
 Route::post('administrator','AdminController@postForm');
+Route::post('createsalon','SalonController@store');

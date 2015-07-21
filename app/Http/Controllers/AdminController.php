@@ -8,17 +8,24 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\SalonCreationRequest;
 use App\Repositories\AdminCreationSalonRepositoryInterface;
+use Illuminate\Routing\Redirector ;
 
 class AdminController extends Controller
 {
-    public function _construct()
+    public function __construct()
     {
-        $this->middleware('admin');
-        $this->middleware('loggedAsAdmin');
+        /*$this->middleware('admin');
+        $this->middleware('loggedAsAdmin');*/
+    }
+    public function mainPage()
+    {
+        return redirect()->action('SalonController@index');
+        //return response("Debut ok",200);
     }
     public function getForm()
     {
-        return view('administration/administratorMain');
+        return redirect()->action('SalonController@index');
+        //return response("Debut ok",200);
     }
     public function postForm(SalonCreationRequest $request,AdminCreationSalonRepositoryInterface $creation)
     {

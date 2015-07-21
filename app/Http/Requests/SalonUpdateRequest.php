@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class SalonCreationRequest extends Request
+class SalonUpdateRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,10 @@ class SalonCreationRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required|max:100|alpha_num'
+            'name' => 'required|max:100|alpha_num',
+            'description' => 'string',
+            'address' => 'required|max:255|string',
+            'owner_id'=>'required|integer|max:10',
             //
         ];
     }
