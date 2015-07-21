@@ -25,3 +25,4 @@ Route::resource('holiday', 'HolidayController');
 Route::get('confirm', 'ConfirmController@getConfirm');
 Route::post('confirm', 'ConfirmController@postConfirm');
 Route::get('end-session', 'Auth\AuthController@endSession');
+Route::get('artisan/create/{n}', 'ArtisanController@create')->where('n', '[0-9]+');

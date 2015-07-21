@@ -32,5 +32,6 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\Admin::class,
         'confirmed' => \App\Http\Middleware\Confirmed::class,
         'not_confirmed' => \App\Http\Middleware\RedirectIfConfirmed::class,
+        'owner' => \App\Http\Middleware\Owner::class,
     ];
 }

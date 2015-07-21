@@ -51,3 +51,7 @@ h1{
     margin-left:auto;
     width:40%;
 }
+
+#table input{
+    width:100%;
+}

@@ -8,7 +8,7 @@ class Artisan extends Model {
 
 	protected $table = 'artisans';
 	public $timestamps = true;
-	protected $fillable = array('name', 'email', 'specialty', 'description', 'sex', 'main_photo');
+	protected $fillable = array('first_name', 'last_name', 'email', 'specialty', 'description', 'sex', 'main_photo', 'salon_id');
 
 	public function salon()
 	{

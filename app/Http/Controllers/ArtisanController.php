@@ -1,81 +1,134 @@
 <?php namespace App\Http\Controllers;
 
-class ArtisanController extends Controller {
+use App\Http\Requests\ArtisanCreateRequest;
+use App\Http\Requests\ArtisanUpdateRequest;
 
-  /**
-   * Display a listing of the resource.
-   *
-   * @return Response
-   */
-  public function index()
-  {
-    
-  }
+use App\Repositories\ArtisanRepository;
 
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return Response
-   */
-  public function create()
-  {
-    
-  }
+use Illuminate\Http\Request;
 
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @return Response
-   */
-  public function store()
-  {
-    
-  }
+class ArtisanController extends Controller
+{
+    protected $artisanRepository;
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function show($id)
-  {
-    
-  }
+    protected $nbrPerPage = 10;
 
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function edit($id)
-  {
-    
-  }
+    public function __construct(ArtisanRepository $artisanRepository)
+    {
+        $this->middleware('auth');
+        $this->middleware('owner');
+        $this->middleware('confirmed');
 
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function update($id)
-  {
-    
-  }
+        $this->artisanRepository = $artisanRepository;
+    }
 
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function destroy($id)
-  {
-    
-  }
-  
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $artisans = $this->artisanRepository->getPaginate($this->nbrPerPage);
+        $links = str_replace('/?', '?', $artisans->render());
+
+        return view('salon_configuration/artisans/index', compact('artisans', 'links'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function create($salon_id)
+    {
+        return view('salon_configuration/artisans/create')->with(['salon_id' => $salon_id]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store(ArtisanCreateRequest $request)
+    {
+        if ($request->file('main_photo') != null) {
+            $main_photo = $this->artisanRepository->compute_photo($request->file('main_photo'));
+        } else {
+            $main_photo = config('images.anonym');
+        }
+        $input = $request->all();
+        if ($main_photo) {
+
+            $inputs = array_merge($input, ['main_photo' => $main_photo]);
+            $artisan = $this->artisanRepository->store($inputs);
+            return redirect('artisan');
+        }
+        return redirect()->back()->withErrors(['error_photo'=>'Your photo cannot be sent']);
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        $artisan = $this->artisanRepository->getById($id);
+
+        return view('salon_configuration/artisans/show', compact('artisan'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+        $artisan = $this->artisanRepository->getById($id);
+
+        return view('salon_configuration/artisans/edit', compact('artisan'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function update(ArtisanCreateRequest $request, $id)
+    {
+        $input=$request->all();
+        if ($request->file('main_photo') != null) {
+            $main_photo = $this->artisanRepository->compute_photo($request->file('main_photo'));
+        } else {
+            $main_photo = $input['current_photo'];
+        }
+        if ($main_photo) {
+            $inputs = array_merge($input, ['main_photo' => $main_photo]);
+            $this->artisanRepository->update($id, $inputs);
+            return redirect('artisan');
+        }
+        return redirect()->back()->withErrors(['error_photo'=>'Your photo cannot be sent']);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        $this->artisanRepository->destroy($id);
+
+        return redirect()->back();
+    }
+
 }
 
 ?>
