@@ -26,7 +26,7 @@ class ReservationController extends Controller {
     $reservations = $this->reservationRepository->getPaginate($this->nbrPerPage);
     $links = str_replace('/?', '?', $reservations->render());
 
-    return view('reservations/reservations/index', compact('reservations', 'links'));
+    return view('timetable/reservations/index', compact('reservations', 'links'));
   }
 
   /**
@@ -36,7 +36,7 @@ class ReservationController extends Controller {
    */
   public function create($artisan_service_id)
   {
-    return view('reservations/reservations/create')->with(['artisan_service_id' => $artisan_service_id]);
+    return view('timetable/reservations/create')->with(['artisan_service_id' => $artisan_service_id]);
   }
 
   /**
@@ -67,7 +67,7 @@ class ReservationController extends Controller {
   {
     $reservation = $this->reservationRepository->getById($id);
 
-    return view('reservations/reservations/show', compact('reservation'));
+    return view('timetable/reservations/show', compact('reservation'));
   }
 
   /**
@@ -80,7 +80,7 @@ class ReservationController extends Controller {
   {
     $reservation = $this->reservationRepository->getById($id);
 
-    return view('reservation/reservations/edit', compact('reservation'));
+    return view('timetable/reservations/edit', compact('reservation'));
   }
 
   /**
