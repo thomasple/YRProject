@@ -13,7 +13,6 @@ class ArtisanRepository
     {
         $this->artisan = $artisan;
     }
-
     private function save(Artisan $artisan, Array $inputs)
     {
         $artisan->first_name = $inputs['first_name'];
@@ -26,6 +25,7 @@ class ArtisanRepository
         $artisan->salon_id = $inputs['salon_id'];
         $artisan->save();
     }
+
 
     public function getPaginate($n)
     {

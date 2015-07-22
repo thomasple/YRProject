@@ -1,7 +1,21 @@
 <?php namespace App\Http\Controllers;
+use App\Http\Requests\ReservationCreateRequest;
+use App\Http\Requests\ReservationUpdateRequest;
 
+use App\Repositories\ReservationRepository;
+
+use Illuminate\Http\Request;
 class ReservationController extends Controller {
+  protected $reservationRepository;
+  protected $nbrPerPage=10;
+  public function __construct(ReservationRepository $reservationRepository)
+  {
+    $this->middleware('auth');
+    $this->middleware('owner');
+    $this->middleware('confirmed');
 
+    $this->reservationRepository = $reservationRepository;
+  }
   /**
    * Display a listing of the resource.
    *
@@ -9,7 +23,10 @@ class ReservationController extends Controller {
    */
   public function index()
   {
-    
+    $reservations = $this->reservationRepository->getPaginate($this->nbrPerPage);
+    $links = str_replace('/?', '?', $reservations->render());
+
+    return view('reservations/reservations/index', compact('reservations', 'links'));
   }
 
   /**
@@ -17,9 +34,9 @@ class ReservationController extends Controller {
    *
    * @return Response
    */
-  public function create()
+  public function create($artisan_service_id)
   {
-    
+    return view('reservations/reservations/create')->with(['artisan_service_id' => $artisan_service_id]);
   }
 
   /**
@@ -27,9 +44,17 @@ class ReservationController extends Controller {
    *
    * @return Response
    */
-  public function store()
+  public function store(ReservationCreateRequest $request)
   {
-    
+    if($this->reservationRepository->checkdates($request->start,$request->end))
+    {
+      $input = $request->all();
+      $artisan = $this->artisanRepository->store($input);
+      return redirect('reservation');
+    }
+    else{
+      return redirect()->back()->withErrors(['error_date'=>'The timeslot you chose either does not exist or is no longer available.']);
+    }
   }
 
   /**
@@ -40,7 +65,9 @@ class ReservationController extends Controller {
    */
   public function show($id)
   {
-    
+    $reservation = $this->reservationRepository->getById($id);
+
+    return view('reservations/reservations/show', compact('reservation'));
   }
 
   /**
@@ -51,7 +78,9 @@ class ReservationController extends Controller {
    */
   public function edit($id)
   {
-    
+    $reservation = $this->reservationRepository->getById($id);
+
+    return view('reservation/reservations/edit', compact('reservation'));
   }
 
   /**
@@ -60,9 +89,17 @@ class ReservationController extends Controller {
    * @param  int  $id
    * @return Response
    */
-  public function update($id)
+  public function update(ReservationCreateRequest $request, $id)
   {
-    
+    if($this->reservationRepository->checkdates($request->start,$request->end))
+    {
+      $input = $request->all();
+      $this->artisanRepository->update($id, $input);
+      return redirect('reservation');
+    }
+    else{
+      return redirect()->back()->withErrors(['error_date'=>'The timeslot you chose either does not exist or is no longer available.']);
+    }
   }
 
   /**
@@ -73,7 +110,9 @@ class ReservationController extends Controller {
    */
   public function destroy($id)
   {
-    
+    $this->reservationRepository->destroy($id);
+
+    return redirect()->back();
   }
   
 }

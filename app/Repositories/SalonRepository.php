@@ -24,8 +24,9 @@ class SalonRepository
         if(isset($inputs['owner_id']))
         {
             $salon->owner_id=$inputs['owner_id'];
-            //$owner=Salon::find($salon->id)->owner;
-            //$owner
+            $owner= User::find($inputs['owner_id']);
+            $owner->salon_owner=1;
+            $owner->save();
         }
         if(isset($inputs['main_photo']))
         {
