@@ -4,6 +4,7 @@ use App\Http\Requests\ArtisanCreateRequest;
 use App\Http\Requests\ArtisanUpdateRequest;
 
 use App\Repositories\ArtisanRepository;
+use App\Repositories\PhotoRepository;
 
 use Illuminate\Http\Request;
 
@@ -50,16 +51,11 @@ class ArtisanController extends Controller
      *
      * @return Response
      */
-    public function store(ArtisanCreateRequest $request)
+    public function store(ArtisanCreateRequest $request, PhotoRepository $photoRepository)
     {
-        if ($request->file('main_photo') != null) {
-            $main_photo = $this->artisanRepository->compute_photo($request->file('main_photo'));
-        } else {
-            $main_photo = config('images.anonym');
-        }
         $input = $request->all();
+        $main_photo=$photoRepository->create_photo($request->file('main_photo'));
         if ($main_photo) {
-
             $inputs = array_merge($input, ['main_photo' => $main_photo]);
             $artisan = $this->artisanRepository->store($inputs);
             return redirect('artisan');
@@ -100,17 +96,13 @@ class ArtisanController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function update(ArtisanCreateRequest $request, $id)
+    public function update(ArtisanCreateRequest $request,PhotoRepository $photoRepository, $id)
     {
         $input=$request->all();
-        if ($request->file('main_photo') != null) {
-            $main_photo = $this->artisanRepository->compute_photo($request->file('main_photo'));
-        } else {
-            $main_photo = $input['current_photo'];
-        }
+        $main_photo=$photoRepository->update_photo($request->file('main_photo'), $input);
         if ($main_photo) {
             $inputs = array_merge($input, ['main_photo' => $main_photo]);
-            $this->artisanRepository->update($id, $inputs);
+            $this->artisanRepository->update($photoRepository, $id, $inputs);
             return redirect('artisan');
         }
         return redirect()->back()->withErrors(['error_photo'=>'Your photo cannot be sent']);
@@ -122,9 +114,9 @@ class ArtisanController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(PhotoRepository $photoRepository, $id)
     {
-        $this->artisanRepository->destroy($id);
+        $this->artisanRepository->destroy($photoRepository, $id);
 
         return redirect()->back();
     }

@@ -44,8 +44,11 @@
         {!! Form::hidden('current_photo', $artisan->main_photo) !!}
         {!! Form::hidden('salon_id', $artisan->salon_id) !!}
 
-        {!! Form::submit('SEND', ['class' => 'btn btn-info btn-block']) !!}
+        {!! Form::submit('Save changes', ['class' => 'btn btn-info pull-right']) !!}
         {!! Form::close() !!}
+        <a href="javascript:history.back()" class="btn btn-danger pull-left">
+            <span class="glyphicon glyphicon-circle-arrow-left"></span> Retour
+        </a>
     </div>
 @endsection
 

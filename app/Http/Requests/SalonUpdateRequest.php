@@ -27,9 +27,8 @@ class SalonUpdateRequest extends Request
             'name' => 'required|max:100',
             'description' => 'string',
             'address' => 'max:255|string',
-            'owner_id'=>'required|integer|max:10',
-            'main_photo'=>'image|max:255'
-            //
+            'owner_id'=>'required|exists:users,id',
+            'main_photo'=>'image'
         ];
     }
 }

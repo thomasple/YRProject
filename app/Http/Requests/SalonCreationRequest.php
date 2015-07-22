@@ -25,7 +25,6 @@ class SalonCreationRequest extends Request
     {
         return [
             'name' => 'required|max:100'
-            //
         ];
     }
 }

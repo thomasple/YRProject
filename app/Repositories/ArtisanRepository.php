@@ -45,37 +45,15 @@ class ArtisanRepository
         return $this->artisan->findOrFail($id);
     }
 
-    public function update($id, Array $inputs)
+    public function update(PhotoRepository $photoRepository, $id, Array $inputs)
     {
-        $photo=$this->getById($id)->main_photo;
-        if($photo!=config('images.anonym')){
-            \File::delete($photo);
-        }
+        $photoRepository->delete_photo($this->getById($id)->main_photo);
         $this->save($this->getById($id), $inputs);
     }
 
-    public function destroy($id)
+    public function destroy(PhotoRepository $photoRepository, $id)
     {
-        $photo=$this->getById($id)->main_photo;
-        if($photo!=config('images.anonym')){
-            \File::delete($photo);
-        }
+        $photoRepository->delete_photo($this->getById($id)->main_photo);
         $this->getById($id)->delete();
     }
-
-    public function compute_photo($photo)
-    {
-        if ($photo->isValid()) {
-            $path = config('images.path');
-            $extension = $photo->getClientOriginalExtension();
-
-            do {
-                $name = str_random(10) . '.' . $extension;
-            }while(file_exists($path.'/'.$name));
-            $photo->move($path, $name);
-            return $path.'/'.$name;
-        }
-        return false;
-    }
-
 }
