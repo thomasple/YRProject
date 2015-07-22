@@ -8,7 +8,7 @@ class Service extends Model {
 
 	protected $table = 'services';
 	public $timestamps = true;
-	protected $fillable = array('name', 'description', 'price', 'duration');
+	protected $fillable = array('name', 'description', 'price', 'duration', 'salon_id');
 
 	public function salon()
 	{

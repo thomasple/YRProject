@@ -5,7 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 
 class CreateUsersTable extends Migration
 {
-
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
