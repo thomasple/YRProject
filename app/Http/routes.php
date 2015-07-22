@@ -26,3 +26,8 @@ Route::get('confirm', 'ConfirmController@getConfirm');
 Route::post('confirm', 'ConfirmController@postConfirm');
 Route::get('end-session', 'Auth\AuthController@endSession');
 Route::get('artisan/create/{n}', 'ArtisanController@create')->where('n', '[0-9]+');
+
+Route::get('administrator','AdminController@getForm');
+Route::post('administrator','AdminController@postForm');
+Route::post('createsalon','SalonController@store');
+Route::get('test',function(){return view('administration/test');});
