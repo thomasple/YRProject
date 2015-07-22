@@ -12,17 +12,17 @@ class Salon extends Model {
 
 	public function owner()
 	{
-		return $this->belongsTo('User');
+		return $this->belongsTo('App\User');
 	}
 
 	public function artisans()
 	{
-		return $this->hasMany('Artisan');
+		return $this->hasMany('App\Artisan');
 	}
 
 	public function services()
 	{
-		return $this->hasMany('Service');
+		return $this->hasMany('App\Service');
 	}
 
 }

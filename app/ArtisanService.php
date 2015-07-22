@@ -12,7 +12,7 @@ class ArtisanService extends Model {
 
 	public function reservations()
 	{
-		return $this->hasMany('Reservation');
+		return $this->hasMany('App\Reservation');
 	}
 
 }

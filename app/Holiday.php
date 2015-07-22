@@ -12,7 +12,7 @@ class Holiday extends Model {
 
 	public function artisan()
 	{
-		return $this->belongsTo('Artisan');
+		return $this->belongsTo('App\Artisan');
 	}
 
 }

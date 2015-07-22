@@ -20,6 +20,14 @@
             {!! Form::text('description', null, ['class' => 'form-control', 'placeholder' => 'Description']) !!}
             {!! $errors->first('description', '<small class="help-block">:message</small>') !!}
         </div>
+        <div class="form-group {!! $errors->has('open_hour') ? 'has-error' : '' !!}">
+            {!! Form::input('time', 'open_hour', date('H:i',strtotime($salon->open_hour)), ['class' => 'form-control']) !!}
+            {!! $errors->first('open_hour', '<small class="help-block">:message</small>') !!}
+        </div>
+        <div class="form-group {!! $errors->has('close_hour') ? 'has-error' : '' !!}">
+            {!! Form::input('time', 'close_hour', date('H:i',strtotime($salon->close_hour)), ['class' => 'form-control']) !!}
+            {!! $errors->first('close_hour', '<small class="help-block">:message</small>') !!}
+        </div>
         <div class="form-group {!! $errors->has('owner_id') ? 'has-error' : '' !!}">
             {!! Form::text('owner_id', null, ['class' => 'form-control', 'placeholder' => 'Owner_id']) !!}
             {!! $errors->first('owner_id', '<small class="help-block">:message</small>') !!}

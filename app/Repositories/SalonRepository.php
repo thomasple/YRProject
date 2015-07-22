@@ -22,10 +22,17 @@ class SalonRepository
         if (isset($inputs['description'])) {
             $salon->description = $inputs['description'];
         }
+        if (isset($inputs['open_hour'])) {
+            $salon->open_hour = $inputs['open_hour'];
+        }
+        if (isset($inputs['close_hour'])) {
+            $salon->close_hour = $inputs['close_hour'];
+        }
         if (isset($inputs['owner_id'])) {
             $salon->owner_id = $inputs['owner_id'];
-            //$owner=Salon::find($salon->id)->owner;
-            //$owner
+            $owner= User::find($inputs['owner_id']);
+            $owner->salon_owner=1;
+            $owner->save();
         }
         $salon->main_photo = $inputs['main_photo'];
         $salon->save();
@@ -33,7 +40,7 @@ class SalonRepository
 
     public function getPaginate($n)
     {
-        return $this->salon->paginate($n);
+        return $this->salon->with('owner')->paginate($n);
     }
 
     public function store(Array $inputs)
@@ -45,18 +52,22 @@ class SalonRepository
 
     public function getById($id)
     {
-        return $this->salon->findOrFail($id);
+        return $this->salon->with('artisans','owner')->findOrFail($id);
     }
 
-    public function update(PhotoRepository $photoRepository, $id, Array $inputs)
+    public function update($salon, Array $inputs)
     {
-        $photoRepository->delete_photo($this->getById($id)->main_photo);
-        $this->save($this->getById($id), $inputs);
+        $this->save($salon, $inputs);
     }
 
     public function destroy(PhotoRepository $photoRepository, $id)
     {
-        $photoRepository->delete_photo($this->getById($id)->main_photo);
-        $this->getById($id)->delete();
+        $salon=$this->getById($id);
+        $photoRepository->delete_photo($salon->main_photo);
+        foreach($salon->artisans as $artisan){
+            $photoRepository->delete_photo($artisan->main_photo);
+            $artisan->delete();
+        }
+        $salon->delete();
     }
 }

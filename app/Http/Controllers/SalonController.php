@@ -17,7 +17,7 @@ class SalonController extends Controller
 
     {
         $this->middleware('auth');
-        $this->middleware('admin');
+        $this->middleware('admin', ['except'=>'show']);
         $this->middleware('confirmed');
         $this->salonRepository = $salonRepository;
     }
@@ -98,11 +98,11 @@ class SalonController extends Controller
     public function update(SalonUpdateRequest $request, PhotoRepository $photoRepository, $id)
     {
         $input = $request->all();
-        $main_photo = $photoRepository->update_photo($request->file('main_photo'), $input);
-
+        $salon=$this->salonRepository->getById($id);
+        $main_photo=$photoRepository->update_photo($request->file('main_photo'), $input, $salon);
         if ($main_photo) {
             $inputs = array_merge($input, ['main_photo' => $main_photo]);
-            $this->salonRepository->update($photoRepository, $id, $inputs);
+            $this->salonRepository->update($salon, $inputs);
             return redirect('administrator')->withMessage("The salon " . $request->input('name') . " was successfully modified.");
         }
         return redirect()->back()->withErrors(['error_photo' => 'Your photo cannot be sent']);

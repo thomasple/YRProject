@@ -28,9 +28,10 @@ class PhotoRepository
         return $main_photo;
     }
 
-    public function update_photo($file, $input)
+    public function update_photo($file, $input, $salon)
     {
-        if ($file != null) {
+        if ($file!=null) {
+            $this->delete_photo($salon->main_photo);
             $main_photo = $this->compute_photo($file);
         } else {
             $main_photo = $input['current_photo'];
@@ -42,6 +43,11 @@ class PhotoRepository
     {
         if ($photo != config('images.anonym')) {
             \File::delete($photo);
+        }
+    }
+    public function delete_all_main_photos($objects){
+        foreach($objects as $object){
+            $this->delete_photo($object->main_photo);
         }
     }
 

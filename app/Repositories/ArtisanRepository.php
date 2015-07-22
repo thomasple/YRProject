@@ -42,13 +42,12 @@ class ArtisanRepository
 
     public function getById($id)
     {
-        return $this->artisan->findOrFail($id);
+        return $this->artisan->with('salon')->findOrFail($id);
     }
 
-    public function update(PhotoRepository $photoRepository, $id, Array $inputs)
+    public function update($salon, Array $inputs)
     {
-        $photoRepository->delete_photo($this->getById($id)->main_photo);
-        $this->save($this->getById($id), $inputs);
+        $this->save($salon, $inputs);
     }
 
     public function destroy(PhotoRepository $photoRepository, $id)

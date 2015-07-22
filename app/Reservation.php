@@ -12,12 +12,12 @@ class Reservation extends Model {
 
 	public function client()
 	{
-		return $this->belongsTo('User');
+		return $this->belongsTo('App\User');
 	}
 
 	public function artisan_service()
 	{
-		return $this->belongsTo('ArtisanService');
+		return $this->belongsTo('App\ArtisanService');
 	}
 
 }

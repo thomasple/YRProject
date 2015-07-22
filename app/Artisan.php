@@ -12,22 +12,22 @@ class Artisan extends Model {
 
 	public function salon()
 	{
-		return $this->belongsTo('Salon');
+		return $this->belongsTo('App\Salon');
 	}
 
 	public function services()
 	{
-		return $this->belongsToMany('Service');
+		return $this->belongsToMany('App\Service');
 	}
 
 	public function timeSlots()
 	{
-		return $this->hasMany('TimeSlot');
+		return $this->hasMany('App\TimeSlot');
 	}
 
 	public function holidays()
 	{
-		return $this->hasMany('Holiday');
+		return $this->hasMany('App\Holiday');
 	}
 
 }

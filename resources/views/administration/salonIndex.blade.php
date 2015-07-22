@@ -11,6 +11,7 @@
             <thead>
             <tr>
                 <th>Name</th>
+                <th>Owner</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -19,6 +20,7 @@
             <tfoot>
             <tr>
                 <th>Name</th>
+                <th>Owner</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -28,6 +30,7 @@
             @foreach($salons as $salon)
                 <tr>
                     <td>{{ $salon->name }}</td>
+                    <td>{{ $salon->owner->first_name.' '.$salon->owner->last_name }}</td>
                     <td>{!! link_to_route('salon.show', 'Show', [$salon->id], ['class' => 'btn btn-success btn-block']) !!}</td>
                     <td>{!! link_to_route('salon.edit', 'Edit', [$salon->id], ['class' => 'btn btn-warning btn-block']) !!}</td>
                     <td>{!! Form::open(['method' => 'DELETE', 'route' => ['salon.destroy', $salon->id]]) !!}
@@ -53,6 +56,7 @@
                 ordering: false
             }).columnFilter({
                 aoColumns: [
+                    {type: "text"},
                     {type: "text"}
                 ]
             });

@@ -24,7 +24,8 @@ class SalonCreationRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required|max:100'
+            'name' => 'required|max:100',
+            'owner_id' => 'required|exists:users,id'
         ];
     }
 }

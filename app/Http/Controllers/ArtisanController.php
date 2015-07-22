@@ -17,7 +17,7 @@ class ArtisanController extends Controller
     public function __construct(ArtisanRepository $artisanRepository)
     {
         $this->middleware('auth');
-        $this->middleware('owner');
+        $this->middleware('owner', ['except' => 'show']);
         $this->middleware('confirmed');
 
         $this->artisanRepository = $artisanRepository;
@@ -99,10 +99,11 @@ class ArtisanController extends Controller
     public function update(ArtisanCreateRequest $request,PhotoRepository $photoRepository, $id)
     {
         $input=$request->all();
-        $main_photo=$photoRepository->update_photo($request->file('main_photo'), $input);
+        $artisan=$this->artisanRepository->getById($id);
+        $main_photo=$photoRepository->update_photo($request->file('main_photo'), $input, $artisan);
         if ($main_photo) {
             $inputs = array_merge($input, ['main_photo' => $main_photo]);
-            $this->artisanRepository->update($photoRepository, $id, $inputs);
+            $this->artisanRepository->update($artisan, $inputs);
             return redirect('artisan');
         }
         return redirect()->back()->withErrors(['error_photo'=>'Your photo cannot be sent']);

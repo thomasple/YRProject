@@ -20,6 +20,8 @@
 
             <p>Description : {{ $artisan->description }}</p>
 
+            <p>Salon : {!! link_to_route('salon.show', $artisan->salon->name, [$artisan->salon->id]) !!}</p>
+
             <p>photo : {!! Html::image($artisan->main_photo, 'Main photo', ['width'=>'100px']) !!}</p>
 
             <a href="javascript:history.back()" class="btn btn-primary">

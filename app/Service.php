@@ -12,17 +12,17 @@ class Service extends Model {
 
 	public function salon()
 	{
-		return $this->belongsTo('Salon');
+		return $this->belongsTo('App\Salon');
 	}
 
 	public function artisans()
 	{
-		return $this->belongsToMany('Artisan');
+		return $this->belongsToMany('App\Artisan');
 	}
 
 	public function timeSlots()
 	{
-		return $this->hasMany('TimeSlot');
+		return $this->hasMany('App\TimeSlot');
 	}
 
 }

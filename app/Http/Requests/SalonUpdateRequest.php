@@ -27,6 +27,8 @@ class SalonUpdateRequest extends Request
             'name' => 'required|max:100',
             'description' => 'string',
             'address' => 'max:255|string',
+            'open_hour' => 'required|date_format:H:i',
+            'close_hour' => 'required|date_format:H:i',
             'owner_id'=>'required|exists:users,id',
             'main_photo'=>'image'
         ];
