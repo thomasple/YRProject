@@ -28,9 +28,9 @@ class SalonRepository
         if (isset($inputs['close_hour'])) {
             $salon->close_hour = $inputs['close_hour'];
         }
-        if (isset($inputs['owner_id'])) {
-            $salon->owner_id = $inputs['owner_id'];
-            $owner= User::find($inputs['owner_id']);
+        if (isset($inputs['user_id'])) {
+            $salon->user_id = $inputs['user_id'];
+            $owner= User::find($inputs['user_id']);
             $owner->salon_owner=1;
             $owner->save();
         }
@@ -40,7 +40,7 @@ class SalonRepository
 
     public function getPaginate($n)
     {
-        return $this->salon->with('owner')->paginate($n);
+        return $this->salon->with('user')->paginate($n);
     }
 
     public function store(Array $inputs)
@@ -52,7 +52,7 @@ class SalonRepository
 
     public function getById($id)
     {
-        return $this->salon->with('artisans','owner')->findOrFail($id);
+        return $this->salon->with('artisans','user', 'services')->findOrFail($id);
     }
 
     public function update($salon, Array $inputs)

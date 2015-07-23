@@ -6,15 +6,15 @@
 
 @section('content')
     <div id="register_body" style="text-align: left;">
-        <h1 style="text-align: center">List Artisans</h1>
+        <h1 style="text-align: center">List Services</h1>
 
         <table class="table table-condensed table-striped" id="table">
             <thead>
             <tr>
                 <th>Name</th>
-                <th>Email</th>
-                <th>Gender</th>
-                <th>Specialty</th>
+                <th>Price (RUR)</th>
+                <th>Duration (min)</th>
+                <th>Salon</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -23,25 +23,25 @@
             <tfoot>
             <tr>
                 <th>Name</th>
-                <th>Email</th>
-                <th>Gender</th>
-                <th>Specialty</th>
+                <th>Price</th>
+                <th>Duration</th>
+                <th>Salon</th>
                 <th></th>
                 <th></th>
                 <th></th>
             </tr>
             </tfoot>
             <tbody>
-            @foreach($artisans as $artisan)
+            @foreach($services as $service)
                 <tr>
-                    <td>{{ $artisan->first_name }} {{ $artisan->last_name }}</td>
-                    <td>{{ $artisan->email }}</td>
-                    <td>{{ $artisan->sex }}</td>
-                    <td>{{ $artisan->specialty }}</td>
-                    <td>{!! link_to_route('artisan.show', 'Show', [$artisan->id], ['class' => 'btn btn-success btn-block']) !!}</td>
-                    <td>{!! link_to_route('artisan.edit', 'Edit', [$artisan->id], ['class' => 'btn btn-warning btn-block']) !!}</td>
-                    <td>{!! Form::open(['method' => 'DELETE', 'route' => ['artisan.destroy', $artisan->id]]) !!}
-                        {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block', 'onclick' => 'return confirm(\'Delete this artisan?\')']) !!}
+                    <td>{{ $service->name }}</td>
+                    <td>{{ $service->price }}</td>
+                    <td>{{ $service->duration }}</td>
+                    <td>{{ $service->salon->name }}</td>
+                    <td>{!! link_to_route('service.show', 'Show', [$service->id], ['class' => 'btn btn-success btn-block']) !!}</td>
+                    <td>{!! link_to_route('service.edit', 'Edit', [$service->id], ['class' => 'btn btn-warning btn-block']) !!}</td>
+                    <td>{!! Form::open(['method' => 'DELETE', 'route' => ['service.destroy', $service->id]]) !!}
+                        {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block', 'onclick' => 'return confirm(\'Delete this service?\')']) !!}
                         {!! Form::close() !!}</td>
                 </tr>
             @endforeach
@@ -66,9 +66,9 @@
             }).columnFilter({
                 aoColumns: [
                     {type: "text"},
-                    {type: "text"},
-                    {type: "select", values: ['M', 'F']},
-                    {type: "text"},
+                    {type: "number"},
+                    {type: "number"},
+                    {type: "text"}
                 ]
             });
         });

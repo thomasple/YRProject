@@ -20,17 +20,17 @@
             {!! Form::text('description', null, ['class' => 'form-control', 'placeholder' => 'Description']) !!}
             {!! $errors->first('description', '<small class="help-block">:message</small>') !!}
         </div>
-        <div class="form-group {!! $errors->has('open_hour') ? 'has-error' : '' !!}">
-            {!! Form::input('time', 'open_hour', date('H:i',strtotime($salon->open_hour)), ['class' => 'form-control']) !!}
+        <div class="form-group {!! $errors->has('open_hour') ? 'has-error' : '' !!}" style="text-align:left">
+             Opening hour : {!! Form::input('time', 'open_hour', date('H:i',strtotime($salon->open_hour)), ['class' => 'form-control', 'placeholder' => 'Opening hour (format HH:mm']) !!}
             {!! $errors->first('open_hour', '<small class="help-block">:message</small>') !!}
         </div>
-        <div class="form-group {!! $errors->has('close_hour') ? 'has-error' : '' !!}">
-            {!! Form::input('time', 'close_hour', date('H:i',strtotime($salon->close_hour)), ['class' => 'form-control']) !!}
+        <div class="form-group {!! $errors->has('close_hour') ? 'has-error' : '' !!}" style="text-align:left">
+             Closing hour : {!! Form::input('time', 'close_hour', date('H:i',strtotime($salon->close_hour)), ['class' => 'form-control', 'placeholder' => 'Closing hour (format HH:mm']) !!}
             {!! $errors->first('close_hour', '<small class="help-block">:message</small>') !!}
         </div>
-        <div class="form-group {!! $errors->has('owner_id') ? 'has-error' : '' !!}">
-            {!! Form::text('owner_id', null, ['class' => 'form-control', 'placeholder' => 'Owner_id']) !!}
-            {!! $errors->first('owner_id', '<small class="help-block">:message</small>') !!}
+        <div class="form-group {!! $errors->has('user_id') ? 'has-error' : '' !!}">
+            {!! Form::text('user_id', null, ['class' => 'form-control', 'placeholder' => 'user_id']) !!}
+            {!! $errors->first('user_id', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('error_photo') ? 'has-error' : '' !!}">
             Current photo : {!! Html::image($salon->main_photo, 'Main photo', ['width'=>'100px']) !!} <br/><br/>
@@ -43,7 +43,7 @@
         {!! Form::close() !!}
 
         <a href="javascript:history.back()" class="btn btn-danger pull-left">
-            <span class="glyphicon glyphicon-circle-arrow-left"></span> Retour
+            <span class="glyphicon glyphicon-circle-arrow-left"></span> Back
         </a>
     </div>
 @stop

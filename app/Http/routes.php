@@ -26,6 +26,12 @@ Route::get('confirm', 'ConfirmController@getConfirm');
 Route::post('confirm', 'ConfirmController@postConfirm');
 Route::get('end-session', 'Auth\AuthController@endSession');
 Route::get('artisan/create/{n}', 'ArtisanController@create')->where('n', '[0-9]+');
+Route::get('service/create/{n}', 'ServiceController@create')->where('n', '[0-9]+');
+Route::get('salon-configuration', function(){
+    return view('salon_configuration/index');
+});
+Route::get('services-for-owner-salons', 'ServiceController@indexForOwnerSalons');
+Route::get('artisans-for-owner-salons', 'ArtisanController@indexForOwnerSalons');
 
 Route::get('administrator','AdminController@getForm');
 Route::post('administrator','AdminController@postForm');

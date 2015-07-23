@@ -12,9 +12,9 @@
             {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name']) !!}
             {!! $errors->first('name', '<small class="help-block">:message</small>') !!}
         </div>
-        <div class="form-group {!! $errors->has('owner_id') ? 'has-error' : '' !!}">
-            {!! Form::text('owner_id', null, ['class' => 'form-control', 'placeholder' => 'Owner id']) !!}
-            {!! $errors->first('owner_id', '<small class="help-block">:message</small>') !!}
+        <div class="form-group {!! $errors->has('user_id') ? 'has-error' : '' !!}">
+            {!! Form::text('user_id', null, ['class' => 'form-control', 'placeholder' => 'Owner id']) !!}
+            {!! $errors->first('user_id', '<small class="help-block">:message</small>') !!}
         </div>
         {!! Form::submit('Confirm', ['class' => 'btn btn-info pull-right']) !!}
         {!! Form::close() !!}

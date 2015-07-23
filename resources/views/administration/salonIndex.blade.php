@@ -30,11 +30,11 @@
             @foreach($salons as $salon)
                 <tr>
                     <td>{{ $salon->name }}</td>
-                    <td>{{ $salon->owner->first_name.' '.$salon->owner->last_name }}</td>
+                    <td>{{ $salon->user->first_name.' '.$salon->user->last_name }}</td>
                     <td>{!! link_to_route('salon.show', 'Show', [$salon->id], ['class' => 'btn btn-success btn-block']) !!}</td>
                     <td>{!! link_to_route('salon.edit', 'Edit', [$salon->id], ['class' => 'btn btn-warning btn-block']) !!}</td>
                     <td>{!! Form::open(['method' => 'DELETE', 'route' => ['salon.destroy', $salon->id]]) !!}
-                        {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block', 'onclick' => 'return confirm(\'Delete this salon?\')']) !!}
+                        {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block', 'onclick' => 'return confirm(\'Delete this salon and all its artisans and services?\')']) !!}
                         {!! Form::close() !!}</td>
                 </tr>
             @endforeach

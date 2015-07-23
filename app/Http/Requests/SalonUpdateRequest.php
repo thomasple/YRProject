@@ -29,7 +29,7 @@ class SalonUpdateRequest extends Request
             'address' => 'max:255|string',
             'open_hour' => 'required|date_format:H:i',
             'close_hour' => 'required|date_format:H:i',
-            'owner_id'=>'required|exists:users,id',
+            'user_id'=>'required|exists:users,id',
             'main_photo'=>'image'
         ];
     }

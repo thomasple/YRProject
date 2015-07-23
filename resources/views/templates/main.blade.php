@@ -14,8 +14,9 @@
     {{ Html::style('https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js') }}
     {{ Html::style('https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js') }}
     <![endif]-->
-    <link rel='stylesheet' href='//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css' />
-    <link rel="shortcut icon" href="{{ url('/images/favicon.png') }}" />
+    <link rel='stylesheet'
+          href='//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css'/>
+    <link rel="shortcut icon" href="{{ url('/images/favicon.png') }}"/>
 
     <style> textarea {
             resize: none;
@@ -34,6 +35,16 @@
             <li>
                 <a href="{{ url('/') }}">Accueil</a>
             </li>
+            @if(Auth::user() AND Auth::user()->admin)
+                <li>
+                    <a href="{{ url('/administrator') }}">Administration</a>
+                </li>
+            @endif
+            @if(Auth::user() AND Auth::user()->salon_owner)
+                <li>
+                    <a href="{{ url('/salon-configuration') }}">Salon configuration</a>
+                </li>
+            @endif
         </ul>
         <ul class="nav navbar-nav navbar-right">
             @if(Auth::user())

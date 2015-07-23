@@ -8,9 +8,9 @@ class Salon extends Model {
 
 	protected $table = 'salons';
 	public $timestamps = true;
-	protected $fillable = array('name', 'description', 'address', 'main_photo');
+	protected $fillable = array('name', 'description', 'address', 'main_photo', 'user_id');
 
-	public function owner()
+	public function user()
 	{
 		return $this->belongsTo('App\User');
 	}
