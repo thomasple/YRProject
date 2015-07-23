@@ -9,7 +9,7 @@ class CreateForeignKeys extends Migration {
 	public function up()
 	{
 		Schema::table('salons', function(Blueprint $table) {
-			$table->foreign('owner_id')->references('id')->on('users')
+			$table->foreign('user_id')->references('id')->on('users')
 						->onDelete('restrict')
 						->onUpdate('restrict');
 		});
@@ -63,7 +63,7 @@ class CreateForeignKeys extends Migration {
 	public function down()
 	{
 		Schema::table('salons', function(Blueprint $table) {
-			$table->dropForeign('salons_owner_id_foreign');
+			$table->dropForeign('salons_user_id_foreign');
 		});
 		Schema::table('artisans', function(Blueprint $table) {
 			$table->dropForeign('artisans_salon_id_foreign');

@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Artisan;
+use App\User;
+use Auth;
 
 class ArtisanRepository
 {
@@ -30,6 +32,19 @@ class ArtisanRepository
     public function getPaginate($n)
     {
         return $this->artisan->paginate($n);
+    }
+
+    public function getArtisansForOwnerSalons()
+    {
+        $salons = User::find(Auth::user()->id)->salons;
+        $artisans = [];
+        foreach ($salons as $salon) {
+            $artisansSalon = $salon->artisans->all();
+            if ($artisansSalon != null) {
+                $artisans = array_merge($artisans, $artisansSalon);
+            }
+        }
+        return $artisans;
     }
 
     public function store(Array $inputs)

@@ -18,7 +18,7 @@
 
             <p>Close at : {{date('H:i',strtotime($salon->close_hour))}}</p>
 
-            <p>Owner : {{$salon->owner->first_name.' '.$salon->owner->last_name}}</p>
+            <p>Owner : {{$salon->user->first_name.' '.$salon->user->last_name}}</p>
 
             <p>Date of creation : {{$salon->created_at}}</p>
 
@@ -29,6 +29,12 @@
             <p>Artisans :
                 @foreach($salon->artisans as $artisan)
                     {!! link_to_route('artisan.show', $artisan->first_name.' '.$artisan->last_name, [$artisan->id]) !!},
+                @endforeach
+            </p>
+
+            <p>Services :
+                @foreach($salon->services as $service)
+                    {!! link_to_route('service.show', $service->name, [$service->id]) !!},
                 @endforeach
             </p>
 

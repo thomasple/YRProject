@@ -1,7 +1,6 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests\ArtisanCreateRequest;
-use App\Http\Requests\ArtisanUpdateRequest;
 
 use App\Repositories\ArtisanRepository;
 use App\Repositories\PhotoRepository;
@@ -18,7 +17,8 @@ class ArtisanController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('owner', ['except' => 'show']);
-        $this->middleware('confirmed');
+        $this->middleware('admin', ['only' => 'index']);
+        $this->middleware('confirmed', ['except' => 'show']);
 
         $this->artisanRepository = $artisanRepository;
     }
@@ -34,6 +34,12 @@ class ArtisanController extends Controller
         $links = str_replace('/?', '?', $artisans->render());
 
         return view('salon_configuration/artisans/index', compact('artisans', 'links'));
+    }
+
+    public function indexForOwnerSalons()
+    {
+        $artisans = $this->artisanRepository->getArtisansForOwnerSalons();
+        return view('salon_configuration/artisans/index', compact('artisans'));
     }
 
     /**
@@ -54,13 +60,13 @@ class ArtisanController extends Controller
     public function store(ArtisanCreateRequest $request, PhotoRepository $photoRepository)
     {
         $input = $request->all();
-        $main_photo=$photoRepository->create_photo($request->file('main_photo'));
+        $main_photo = $photoRepository->create_photo($request->file('main_photo'));
         if ($main_photo) {
             $inputs = array_merge($input, ['main_photo' => $main_photo]);
             $artisan = $this->artisanRepository->store($inputs);
             return redirect('artisan');
         }
-        return redirect()->back()->withErrors(['error_photo'=>'Your photo cannot be sent']);
+        return redirect()->back()->withErrors(['error_photo' => 'Your photo cannot be sent']);
 
     }
 
@@ -96,17 +102,17 @@ class ArtisanController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function update(ArtisanCreateRequest $request,PhotoRepository $photoRepository, $id)
+    public function update(ArtisanCreateRequest $request, PhotoRepository $photoRepository, $id)
     {
-        $input=$request->all();
-        $artisan=$this->artisanRepository->getById($id);
-        $main_photo=$photoRepository->update_photo($request->file('main_photo'), $input, $artisan);
+        $input = $request->all();
+        $artisan = $this->artisanRepository->getById($id);
+        $main_photo = $photoRepository->update_photo($request->file('main_photo'), $input, $artisan);
         if ($main_photo) {
             $inputs = array_merge($input, ['main_photo' => $main_photo]);
             $this->artisanRepository->update($artisan, $inputs);
             return redirect('artisan');
         }
-        return redirect()->back()->withErrors(['error_photo'=>'Your photo cannot be sent']);
+        return redirect()->back()->withErrors(['error_photo' => 'Your photo cannot be sent']);
     }
 
     /**

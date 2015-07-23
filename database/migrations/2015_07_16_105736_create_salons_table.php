@@ -17,7 +17,7 @@ class CreateSalonsTable extends Migration
             $table->time('open_hour')->default('08:00');
             $table->time('close_hour')->default('18:00');
             $table->string('main_photo', 255);
-            $table->integer('owner_id')->nullable()->default(NULL)->unsigned();
+            $table->integer('user_id')->nullable()->default(NULL)->unsigned();
         });
     }
 

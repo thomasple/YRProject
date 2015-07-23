@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class SalonCreationRequest extends Request
+class ServiceCreateRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,9 @@ class SalonCreationRequest extends Request
     {
         return [
             'name' => 'required|max:100',
-            'user_id' => 'required|exists:users,id'
+            'price' => 'required|integer',
+            'duration' => 'required|integer',
+            'salon_id' => 'required|exists:salons,id',
         ];
     }
 }

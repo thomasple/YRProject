@@ -12,7 +12,7 @@ class CreateServicesTable extends Migration {
 			$table->timestamps();
 			$table->string('name', 100);
 			$table->text('description');
-			$table->decimal('price');
+			$table->integer('price');
 			$table->integer('duration');
 			$table->integer('salon_id')->unsigned();
 		});

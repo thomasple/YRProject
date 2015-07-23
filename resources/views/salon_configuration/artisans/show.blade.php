@@ -1,7 +1,7 @@
 @extends('templates/main')
 
 @section('title')
-    Show artisan
+    Salon configuration
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
         <h1 style="text-align: center">Show Artisan</h1>
 
         <div style="text-align: left">
-            <p>Nom : {{ $artisan->first_name.' '.$artisan->last_name }}</p>
+            <p>Name : {{ $artisan->first_name.' '.$artisan->last_name }}</p>
 
             <p>Email : {{ $artisan->email }}</p>
 

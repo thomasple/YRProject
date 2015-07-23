@@ -1,7 +1,7 @@
 @extends('templates/main')
 
 @section('title')
-    Artisan configuration
+    Salon configuration
 @endsection
 @section('content')
 
