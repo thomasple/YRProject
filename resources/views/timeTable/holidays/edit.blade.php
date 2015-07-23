@@ -12,14 +12,14 @@
         <h1 style="text-align: center">Edit holiday</h1>
 
 
-        {!! Form::open(['url' => '/reservation']) !!}
+        {!! Form::model($holiday, ['route' => ['holiday.update', $holiday->id], 'method'=>'put']) !!}
 
         <div class="form-group {!! $errors->has('start') ? 'has-error' : '' !!}">
-            {!! Form::input('datetime','start',\Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+            {!! Form::input('datetime','start',null, ['class' => 'form-control','value'=>old('start')]) !!}
             {!! $errors->first('start', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('end') ? 'has-error' : '' !!}">
-            {!! Form::input('datetime','end', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+            {!! Form::input('datetime','end', null, ['class' => 'form-control','value'=>old('end')]) !!}
             {!! $errors->first('end', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('artisan_id') ? 'has-error' : '' !!}">

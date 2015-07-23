@@ -12,14 +12,14 @@
         <h1 style="text-align: center">Edit reservation</h1>
 
 
-        {!! Form::open(['url' => '/reservation']) !!}
+        {!! Form::model($timeslot, ['route' => ['timeslot.update', $timeslot->id], 'method'=>'put']) !!}
 
         <div class="form-group {!! $errors->has('start') ? 'has-error' : '' !!}">
-            {!! Form::input('datetime','start',\Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+            {!! Form::input('datetime','start',null, ['class' => 'form-control']) !!}
             {!! $errors->first('start', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('end') ? 'has-error' : '' !!}">
-            {!! Form::input('datetime','end', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+            {!! Form::input('datetime','end', null, ['class' => 'form-control']) !!}
             {!! $errors->first('end', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('client_id') ? 'has-error' : '' !!}">
