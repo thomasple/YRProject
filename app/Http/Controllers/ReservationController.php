@@ -94,7 +94,7 @@ class ReservationController extends Controller {
     if($this->reservationRepository->checkdates($request->start,$request->end))
     {
       $input = $request->all();
-      $this->artisanRepository->update($id, $input);
+      $this->reservationRepository->update($id, $input);
       return redirect('reservation');
     }
     else{

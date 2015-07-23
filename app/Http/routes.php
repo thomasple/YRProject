@@ -35,3 +35,4 @@ Route::post('createsalon','SalonController@store');
 
 Route::get('reservation/create/{n}', 'ReservationController@create')->where('n', '[0-9]+');
 Route::get('timeslot/create/{n}/{p}', 'TimeSlotController@create')->where(['n', '[0-9]+'])->where(['p','[0-9]+']);
+Route::get('holiday/create/{n}', 'HolidayController@create')->where('n', '[0-9]+');
