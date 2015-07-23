@@ -24,11 +24,10 @@ class ReservationCreateRequest extends Request
     public function rules()
     {
         return [
-            'start' => 'required|date',
-            'end' => 'required|date',
+            'start' => 'required|date_format:Y-n-j H:i:s',
+            'end' => 'required|date_format:Y-n-j H:i:s',
             'client_id' => 'required|exists:users,id',
             'artisan_service_id' => 'required|exists:artisans_services,id',
-            'salon_id' => 'required|exists:salons,id',
         ];
     }
 }

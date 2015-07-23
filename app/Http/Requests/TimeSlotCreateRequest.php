@@ -25,8 +25,8 @@ class TimeSlotCreateRequest extends Request
     {
         return [
             'day' => 'required|alpha|max:2',
-            'from_hour' => 'required|dateformat:H:i',
-            'to_hour' => 'required|dateformat:H:i',
+            'from_hour' => 'required|dateformat:H:i:s',
+            'to_hour' => 'required|dateformat:H:i:s',
             'service_id' => 'required|Integer|max:10',
             'artisan_id' => 'required|Integer|max:10',
         ];

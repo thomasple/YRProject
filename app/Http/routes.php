@@ -31,7 +31,7 @@ Route::get('artisan/create/{n}', 'ArtisanController@create')->where('n', '[0-9]+
 Route::get('administrator','AdminController@getForm');
 Route::post('administrator','AdminController@postForm');
 Route::post('createsalon','SalonController@store');
-Route::get('test',function(){return view('administration/test');});
+
 
 Route::get('reservation/create/{n}', 'ReservationController@create')->where('n', '[0-9]+');
 Route::get('timeslot/create/{n}/{p}', 'TimeSlotController@create')->where(['n', '[0-9]+'])->where(['p','[0-9]+']);

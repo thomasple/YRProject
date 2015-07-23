@@ -40,7 +40,7 @@
             <td>{{ $reservation->artisan_service_id }}</td>
             <td>{!! link_to_route('reservation.show', 'Show', [$reservation->id], ['class' => 'btn btn-success btn-block']) !!}</td>
             <td>{!! link_to_route('reservation.edit', 'Edit', [$reservation->id], ['class' => 'btn btn-warning btn-block']) !!}</td>
-            <td>{!! Form::open(['method' => 'DELETE', 'route' => ['reservation.destroy', $artisan->id]]) !!}
+            <td>{!! Form::open(['method' => 'DELETE', 'route' => ['reservation.destroy', $reservation->id]]) !!}
                 {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block', 'onclick' => 'return confirm(\'Delete this reservation?\')']) !!}
                 {!! Form::close() !!}</td>
         </tr>

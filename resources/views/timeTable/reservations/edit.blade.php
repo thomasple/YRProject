@@ -17,11 +17,11 @@
 
         {{--{!! Form::hidden('client_id', $salon_id) !!}--}}
         <div class="form-group {!! $errors->has('start') ? 'has-error' : '' !!}">
-            {!! Form::date('start', null, ['class' => 'form-control', 'placeholder' => 'Start hour', 'value' => old('start')]) !!}
+            {!! Form::input('datetime','start',\Carbon\Carbon::now(), ['class' => 'form-control']) !!}
             {!! $errors->first('start', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('end') ? 'has-error' : '' !!}">
-            {!! Form::date('end', null, ['class' => 'form-control', 'placeholder' => 'End hour', 'value' => old('end')]) !!}
+            {!! Form::input('datetime','end', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
             {!! $errors->first('end', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('client_id') ? 'has-error' : '' !!}">

@@ -15,7 +15,6 @@
                 <th>Email</th>
                 <th>Gender</th>
                 <th>Specialty</th>
-                <th>Salon</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -27,7 +26,6 @@
                 <th>Email</th>
                 <th>Gender</th>
                 <th>Specialty</th>
-                <th>Salon</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -40,7 +38,6 @@
                     <td>{{ $artisan->email }}</td>
                     <td>{{ $artisan->sex }}</td>
                     <td>{{ $artisan->specialty }}</td>
-                    <td>{{ $artisan->salon_id }}</td>
                     <td>{!! link_to_route('artisan.show', 'Show', [$artisan->id], ['class' => 'btn btn-success btn-block']) !!}</td>
                     <td>{!! link_to_route('artisan.edit', 'Edit', [$artisan->id], ['class' => 'btn btn-warning btn-block']) !!}</td>
                     <td>{!! Form::open(['method' => 'DELETE', 'route' => ['artisan.destroy', $artisan->id]]) !!}
@@ -69,7 +66,6 @@
                     {type: "text"},
                     {type: "select", values: ['M', 'F']},
                     {type: "text"},
-                    {type: "text"}
                 ]
             });
         });

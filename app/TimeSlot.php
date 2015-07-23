@@ -12,12 +12,12 @@ class TimeSlot extends Model {
 
 	public function artisan()
 	{
-		return $this->belongsTo('Artisan');
+		return $this->belongsTo('App\Artisan');
 	}
 
 	public function service()
 	{
-		return $this->belongsTo('Service');
+		return $this->belongsTo('App\Service');
 	}
 
 }

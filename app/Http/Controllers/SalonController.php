@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\SalonRepository;
+use App\Repositories\PhotoRepository;
 use App\Http\Requests\SalonCreationRequest;
 use App\Http\Requests\SalonUpdateRequest;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class SalonController extends Controller
 
     {
         $this->middleware('auth');
-        $this->middleware('admin');
+        $this->middleware('admin', ['except'=>'show']);
         $this->middleware('confirmed');
         $this->salonRepository = $salonRepository;
     }
@@ -33,7 +34,6 @@ class SalonController extends Controller
         $links = str_replace('/?', '?', $salons->render());
 
         return view('administration/salonIndex', compact('salons', 'links'));
-        //return response("ok",200);
     }
 
     /**
@@ -51,11 +51,17 @@ class SalonController extends Controller
      *
      * @return Response
      */
-    public function store(SalonCreationRequest $request)
+    public function store(SalonCreationRequest $request, PhotoRepository $photoRepository)
     {
-        //return response("OK",200);
-        $salon = $this->salonRepository->store($request->all());
-        return redirect('administrator')->withMessage("The salon " . $salon->name . "was successfully added to the database.");
+        $input = $request->all();
+        $main_photo = $photoRepository->create_photo(null);
+
+        if ($main_photo) {
+            $inputs = array_merge($input, ['main_photo' => $main_photo]);
+            $salon = $this->salonRepository->store($inputs);
+            return redirect('administrator')->withMessage("The salon " . $salon->name . "was successfully added to the database.");
+        }
+        return redirect()->back()->withErrors(['error_photo' => 'Your photo cannot be sent']);
     }
 
     /**
@@ -89,11 +95,17 @@ class SalonController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function update(SalonUpdateRequest $request, $id)
+    public function update(SalonUpdateRequest $request, PhotoRepository $photoRepository, $id)
     {
-        //return response("Ok update",200);
-        $this->salonRepository->update($id, $request->all());
-        return redirect('administrator')->withMessage("The salon " . $request->input('name') . " was successfully modified.");
+        $input = $request->all();
+        $salon=$this->salonRepository->getById($id);
+        $main_photo=$photoRepository->update_photo($request->file('main_photo'), $input, $salon);
+        if ($main_photo) {
+            $inputs = array_merge($input, ['main_photo' => $main_photo]);
+            $this->salonRepository->update($salon, $inputs);
+            return redirect('administrator')->withMessage("The salon " . $request->input('name') . " was successfully modified.");
+        }
+        return redirect()->back()->withErrors(['error_photo' => 'Your photo cannot be sent']);
     }
 
     /**
@@ -102,9 +114,9 @@ class SalonController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(PhotoRepository $photoRepository, $id)
     {
-        $this->salonRepository->destroy($id);
+        $this->salonRepository->destroy($photoRepository, $id);
         return redirect('administrator')->withMessage("The salon was successfully deleted from the database");
     }
 

@@ -9,32 +9,24 @@
          id="register_body">
         <h1 style="text-align: center">Create Time Slot</h1>
 
-        {{--{!! $errors->first('artisan_id', '<small class="help-block">:message</small>') !!}--}}
-        {{--{!! $errors->first('service_id', '<small class="help-block">:message</small>') !!}--}}
+        {!! $errors->first('artisan_id', '<small class="help-block">:message</small>') !!}
+        {!! $errors->first('service_id', '<small class="help-block">:message</small>') !!}
         {!! Form::open(['url' => '/timeslot']) !!}
 
-        {{--{!! Form::hidden('artisan_id', $artisan_id) !!}--}}
-        {{--{!! Form::hidden('service_id', $service_id) !!}--}}
+        {!! Form::hidden('artisan_id', $artisan_id) !!}
+        {!! Form::hidden('service_id', $service_id) !!}
         <div class="form-group {!! $errors->has('day') ? 'has-error' : '' !!}">
             Day
             {!! Form::select('day',['Mo'=>'Monday','Tu'=>'Tuesday','We'=>'Wednesday','Th'=>'Thursday','Fr'=>'Friday','Sa'=>'Saturday','Su'=>'Sunday'], ['class' => 'form-control', 'placeholder' => 'Day', 'value' => old('day')]) !!}
             {!! $errors->first('day', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('from_hour') ? 'has-error' : '' !!}">
-            {!! Form::time('from_hour', null, ['class' => 'form-control', 'placeholder' => 'From', 'value' => old('from_hour')]) !!}
+            {!! Form::input('time','from_hour',  \Carbon\Carbon::now()->toTimeString(), ['class' => 'form-control', 'placeholder' => 'From', 'value' => old('from_hour')]) !!}
             {!! $errors->first('from_hour', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('to_hour') ? 'has-error' : '' !!}">
-            {!! Form::time('to_hour', null, ['class' => 'form-control', 'placeholder' => 'To', 'value' => old('to_hour')]) !!}
+            {!! Form::input('time','to_hour',  \Carbon\Carbon::now()->toTimeString(), ['class' => 'form-control', 'placeholder' => 'To', 'value' => old('to_hour')]) !!}
             {!! $errors->first('to_hour', '<small class="help-block">:message</small>') !!}
-        </div>
-        <div class="form-group {!! $errors->has('artisan_id') ? 'has-error' : '' !!}">
-            {!! Form::textarea('artisan_id', null, ['class' => 'form-control', 'placeholder' => 'Artisan ID', 'value' => old('artisan_id')]) !!}
-            {!! $errors->first('artisan_id', '<small class="help-block">:message</small>') !!}
-        </div>
-        <div class="form-group {!! $errors->has('service_id') ? 'has-error' : '' !!}">
-            {!! Form::textarea('service_id', null, ['class' => 'form-control', 'placeholder' => 'Service ID', 'value' => old('service_id')]) !!}
-            {!! $errors->first('service_id', '<small class="help-block">:message</small>') !!}
         </div>
 
 

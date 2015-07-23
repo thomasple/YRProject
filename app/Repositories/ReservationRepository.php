@@ -51,6 +51,7 @@ class ReservationRepository
     //à compléter
     public function checkdates($start,$end)
     {
+        return true;
         //if()
     }
 }

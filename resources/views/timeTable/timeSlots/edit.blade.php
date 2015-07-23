@@ -15,11 +15,11 @@
             {!! $errors->first('day', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('from_hour') ? 'has-error' : '' !!}">
-            {!! Form::time('from_hour', null, ['class' => 'form-control', 'placeholder' => 'From', 'value' => old('from_hour')]) !!}
+            {!! Form::input('time','from_hour',  null, ['class' => 'form-control', 'placeholder' => 'From', 'value' => old('from_hour')]) !!}
             {!! $errors->first('from_hour', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('to_hour') ? 'has-error' : '' !!}">
-            {!! Form::time('to_hour', null, ['class' => 'form-control', 'placeholder' => 'To', 'value' => old('to_hour')]) !!}
+            {!! Form::input('time','to_hour', null, ['class' => 'form-control', 'placeholder' => 'To', 'value' => old('to_hour')]) !!}
             {!! $errors->first('to_hour', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('artisan_id') ? 'has-error' : '' !!}">
