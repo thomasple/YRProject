@@ -7,7 +7,7 @@ class CreateArtisansServicesTable extends Migration {
 
 	public function up()
 	{
-		Schema::create('artisans_services', function(Blueprint $table) {
+		Schema::create('artisan_service', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('artisan_id')->unsigned();
 			$table->integer('service_id')->unsigned();
@@ -16,6 +16,6 @@ class CreateArtisansServicesTable extends Migration {
 
 	public function down()
 	{
-		Schema::drop('artisans_services');
+		Schema::drop('artisan_service');
 	}
 }

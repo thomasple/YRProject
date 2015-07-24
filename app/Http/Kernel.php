@@ -34,5 +34,6 @@ class Kernel extends HttpKernel
         'not_confirmed' => \App\Http\Middleware\RedirectIfConfirmed::class,
         'owner' => \App\Http\Middleware\Owner::class,
         'chose_salon' => \App\Http\Middleware\ChoseSalon::class,
+        'ajax' => \App\Http\Middleware\Ajax::class,
     ];
 }

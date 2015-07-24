@@ -30,6 +30,10 @@ Route::get('chose-salon', 'ConfirmController@getChoseSalon');
 Route::get('confirm-salon/{n}', 'ConfirmController@getConfirmSalon')->where('n', '[0-9]+');
 Route::get('end-session', 'Auth\AuthController@endSession');
 
+Route::get('owner/attach-from-service/{n}', 'OwnerController@getAttachFromService')->where('n', '[0-9]+');
+Route::get('owner/attach-from-artisan/{n}', 'OwnerController@getAttachFromArtisan')->where('n', '[0-9]+');
+Route::get('attach-artisan-service/{artisan_id}/{service_id}', 'OwnerController@attachArtisanService')->where(['artisan_id'=>'[0-9]+', 'service_id'=>'[0-9]+']);
+Route::get('detach-artisan-service/{artisan_id}/{service_id}', 'OwnerController@detachArtisanService')->where(['artisan_id'=>'[0-9]+', 'service_id'=>'[0-9]+']);
 
 Route::get('administrator','AdminController@getForm');
 Route::post('administrator','AdminController@postForm');

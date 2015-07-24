@@ -20,10 +20,22 @@
 
             <p>Description : {{ $artisan->description }}</p>
 
-            <p>Salon : {!! link_to_route('salon.show', $artisan->salon->name, [$artisan->salon->id]) !!}</p>
+            <p>Salon : {!! link_to_route('salon.show', $artisan->salon->name, [$artisan->salon_id]) !!}</p>
 
             <p>photo : {!! Html::image($artisan->main_photo, 'Main photo', ['width'=>'100px']) !!}</p>
 
+            @if(session()->has('salon_chosen') AND session('salon_chosen')==$artisan->salon_id)
+                <p>
+                    <a href="{{ url('/owner/attach-from-artisan/'.$artisan->id) }}" class="btn btn-info">Attach
+                        services</a>
+                </p>
+            @endif
+
+            <p>Services provided :
+                @foreach($artisan->services as $service)
+                    {!! link_to_route('service.show', $service->name, [$service->id]) !!},
+                @endforeach
+            </p>
             <a href="javascript:history.back()" class="btn btn-primary">
                 <span class="glyphicon glyphicon-circle-arrow-left"></span> Back
             </a>
