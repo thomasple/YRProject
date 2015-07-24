@@ -6,6 +6,7 @@
 
 @section('content')
     <div id="register_body" style="text-align: left;">
+        <h1 style="text-align: center">{{ session('salon_chosen_name') }}</h1>
         <h1 style="text-align: center">List Services</h1>
 
         <table class="table table-condensed table-striped" id="table">
@@ -13,8 +14,7 @@
             <tr>
                 <th>Name</th>
                 <th>Price (RUR)</th>
-                <th>Duration (min)</th>
-                <th>Salon</th>
+                <th>Duration</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -25,7 +25,6 @@
                 <th>Name</th>
                 <th>Price</th>
                 <th>Duration</th>
-                <th>Salon</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -36,8 +35,7 @@
                 <tr>
                     <td>{{ $service->name }}</td>
                     <td>{{ $service->price }}</td>
-                    <td>{{ $service->duration }}</td>
-                    <td>{{ $service->salon->name }}</td>
+                    <td>{{ $service->duration }} min</td>
                     <td>{!! link_to_route('service.show', 'Show', [$service->id], ['class' => 'btn btn-success btn-block']) !!}</td>
                     <td>{!! link_to_route('service.edit', 'Edit', [$service->id], ['class' => 'btn btn-warning btn-block']) !!}</td>
                     <td>{!! Form::open(['method' => 'DELETE', 'route' => ['service.destroy', $service->id]]) !!}
@@ -47,6 +45,7 @@
             @endforeach
             </tbody>
         </table>
+        {!! link_to_route('service.create', 'Create new service', [], ['class' => 'btn btn-info pull-right']) !!}
         <a href="javascript:history.back()" class="btn btn-primary">
             <span class="glyphicon glyphicon-circle-arrow-left"></span> Back
         </a>
@@ -62,13 +61,12 @@
     <script>
         $(document).ready(function () {
             $('#table').dataTable({
-                ordering: false
+                ordering: true
             }).columnFilter({
                 aoColumns: [
                     {type: "text"},
                     {type: "number"},
                     {type: "number"},
-                    {type: "text"}
                 ]
             });
         });

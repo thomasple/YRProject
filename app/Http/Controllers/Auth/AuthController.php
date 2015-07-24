@@ -74,6 +74,7 @@ class AuthController extends Controller
     protected function endSession()
     {
         Session::forget('confirmed');
+        Session::forget('salon_chosen');
         return redirect('/');
     }
 }

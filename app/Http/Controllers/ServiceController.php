@@ -19,8 +19,8 @@ class ServiceController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('owner', ['except' => 'show']);
-        $this->middleware('admin', ['only' => 'index']);
         $this->middleware('confirmed', ['except' => 'show']);
+        $this->middleware('chose_salon', ['except' => 'show']);
 
         $this->serviceRepository = $serviceRepository;
     }
@@ -32,15 +32,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = $this->serviceRepository->getPaginate($this->nbrPerPage);
-        $links = str_replace('/?', '?', $services->render());
-
-        return view('salon_configuration/services/index', compact('services', 'links'));
-    }
-
-    public function indexForOwnerSalons()
-    {
-        $services = $this->serviceRepository->getServicesForOwnerSalons();
+        $services = Salon::find(session('salon_chosen'))->services;
         return view('salon_configuration/services/index', compact('services'));
     }
 
@@ -49,8 +41,9 @@ class ServiceController extends Controller
      *
      * @return Response
      */
-    public function create($salon_id)
+    public function create()
     {
+        $salon_id=session('salon_chosen');
         return view('salon_configuration/services/create')->with(['salon_id' => $salon_id]);
     }
 
@@ -64,7 +57,7 @@ class ServiceController extends Controller
         $inputs = $request->all();
         if ($inputs['duration'] % 15 == 0 AND $inputs['duration'] > 0) {
             $service = $this->serviceRepository->store($inputs);
-            return redirect('service');
+            return redirect('/service');
         }
         return redirect()->back()->withErrors(['duration' => 'The duration must be a multiple of 15 minutes']);
     }
@@ -91,8 +84,10 @@ class ServiceController extends Controller
     public function edit($id)
     {
         $service = $this->serviceRepository->getById($id);
-
-        return view('salon_configuration/services/edit', compact('service'));
+        if ($service->salon_id == session('salon_chosen')) {
+            return view('salon_configuration/services/edit', compact('service'));
+        }
+        return redirect('/');
     }
 
     /**
@@ -106,7 +101,7 @@ class ServiceController extends Controller
         $inputs = $request->all();
         if ($inputs['duration'] % 15 == 0 AND $inputs['duration'] > 0) {
             $this->serviceRepository->update($id, $inputs);
-            return redirect('service');
+            return redirect('/service');
         }
         return redirect()->back()->withErrors(['duration' => 'The duration must be a multiple of 15 minutes']);
     }
@@ -119,7 +114,10 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        $this->serviceRepository->destroy($id);
+        $service=$this->serviceRepository->getById($id);
+        if ($service->salon_id == session('salon_chosen')) {
+            $this->serviceRepository->destroy($id);
+        }
         return redirect()->back();
     }
 

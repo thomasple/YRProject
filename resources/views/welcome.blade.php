@@ -13,6 +13,9 @@
                 @if(session()->has('confirmed') AND session('confirmed'))
                     You have confirmed your password.
                 @endif
+                @if(session()->has('salon_chosen') AND session('salon_chosen')!=null)
+                    You have chosen salon : {{ session('salon_chosen_name') }}
+                @endif
             </p>
         </div>
     </div>

@@ -70,6 +70,9 @@ class SalonRepository
             $photoRepository->delete_photo($artisan->main_photo);
             $artisan->delete();
         }
+        foreach ($salon->services as $service) {
+            $service->delete();
+        }
         $salon->delete();
     }
 }

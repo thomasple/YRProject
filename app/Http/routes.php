@@ -13,7 +13,8 @@
 
 Route::get('/', 'WelcomeController@index');
 
-Route::resource('user', 'UserController');
+Route::controller('user', 'UserController');
+Route::controller('owner', 'OwnerController');
 Route::resource('salon', 'SalonController');
 Route::resource('artisan', 'ArtisanController');
 Route::resource('service', 'ServiceController');
@@ -24,14 +25,10 @@ Route::resource('holiday', 'HolidayController');
 
 Route::get('confirm', 'ConfirmController@getConfirm');
 Route::post('confirm', 'ConfirmController@postConfirm');
+Route::get('change_salon','ConfirmController@changeSalon');
+Route::get('chose-salon', 'ConfirmController@getChoseSalon');
+Route::get('confirm-salon/{n}', 'ConfirmController@getConfirmSalon')->where('n', '[0-9]+');
 Route::get('end-session', 'Auth\AuthController@endSession');
-Route::get('artisan/create/{n}', 'ArtisanController@create')->where('n', '[0-9]+');
-Route::get('service/create/{n}', 'ServiceController@create')->where('n', '[0-9]+');
-Route::get('salon-configuration', function(){
-    return view('salon_configuration/index');
-});
-Route::get('services-for-owner-salons', 'ServiceController@indexForOwnerSalons');
-Route::get('artisans-for-owner-salons', 'ArtisanController@indexForOwnerSalons');
 
 
 Route::get('administrator','AdminController@mainPage');
