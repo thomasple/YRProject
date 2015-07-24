@@ -6,6 +6,7 @@
 
 @section('content')
     <div id="register_body" style="text-align: left;">
+        <h1 style="text-align: center">{{ session('salon_chosen_name') }}</h1>
         <h1 style="text-align: center">List Artisans</h1>
 
         <table class="table table-condensed table-striped" id="table">
@@ -47,6 +48,7 @@
             @endforeach
             </tbody>
         </table>
+        {!! link_to_route('artisan.create', 'Create new artisan', [], ['class' => 'btn btn-info pull-right']) !!}
         <a href="javascript:history.back()" class="btn btn-primary">
             <span class="glyphicon glyphicon-circle-arrow-left"></span> Back
         </a>
@@ -62,7 +64,7 @@
     <script>
         $(document).ready(function () {
             $('#table').dataTable({
-                ordering: false
+                ordering: true
             }).columnFilter({
                 aoColumns: [
                     {type: "text"},

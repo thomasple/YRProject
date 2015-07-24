@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Artisan;
 use App\User;
+use App\Salon;
 use Auth;
 
 class ArtisanRepository
@@ -15,6 +16,7 @@ class ArtisanRepository
     {
         $this->artisan = $artisan;
     }
+
     private function save(Artisan $artisan, Array $inputs)
     {
         $artisan->first_name = $inputs['first_name'];

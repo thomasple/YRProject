@@ -40,7 +40,10 @@
             @endforeach
             </tbody>
         </table>
-        {!! link_to_route('salon.create', 'Create new salon', [], ['class' => 'btn btn-info']) !!}
+        {!! link_to_route('salon.create', 'Create new salon', [], ['class' => 'btn btn-info pull-right']) !!}
+        <a href="javascript:history.back()" class="btn btn-primary">
+            <span class="glyphicon glyphicon-circle-arrow-left"></span> Back
+        </a>
     </div>
 @endsection
 
@@ -53,7 +56,7 @@
     <script>
         $(document).ready(function () {
             $('#table').dataTable({
-                ordering: false
+                ordering: true
             }).columnFilter({
                 aoColumns: [
                     {type: "text"},

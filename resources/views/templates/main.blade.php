@@ -42,7 +42,7 @@
             @endif
             @if(Auth::user() AND Auth::user()->salon_owner)
                 <li>
-                    <a href="{{ url('/salon-configuration') }}">Salon configuration</a>
+                    <a href="{{ url('/owner/salon-configuration') }}">Salon configuration</a>
                 </li>
             @endif
         </ul>
@@ -63,6 +63,12 @@
          style="background:url('{{asset('images/login_roll.png')}}') no-repeat; background-size: contain;">
         <a class="btn btn-info btn-lg" role="button" href="{{ url('/auth/login') }}">Login <span
                     class="glyphicon glyphicon glyphicon-hand-right"></span></a>
+    </div>
+@endif
+@if(Auth::user() AND session()->has('salon_chosen') AND session('salon_chosen')!=null AND session('nb_salons')>1)
+    <div class="login_roll chosen_salon">
+        You are configuring salon :<br/> {{ session('salon_chosen_name') }}
+        <a href="{{ url('/change_salon') }}">Change salon</a>
     </div>
 @endif
 

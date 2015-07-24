@@ -7,6 +7,7 @@
 
     <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-6 col-sm-offset-3 col-xs-12"
          id="register_body">
+        <h1 style="text-align: center">{{ session('salon_chosen_name') }}</h1>
         <h1 style="text-align: center">Create Service</h1>
 
         {!! $errors->first('salon_id', '<small class="help-block">:message</small>') !!}
@@ -33,8 +34,11 @@
             {!! $errors->first('description', '<small class="help-block">:message</small>') !!}
         </div>
 
-        {!! Form::submit('SEND', ['class' => 'btn btn-info btn-block']) !!}
+        {!! Form::submit('Create service', ['class' => 'btn btn-info pull-right']) !!}
         {!! Form::close() !!}
+        <a href="javascript:history.back()" class="btn btn-danger pull-left">
+            <span class="glyphicon glyphicon-circle-arrow-left"></span> Retour
+        </a>
     </div>
 @endsection
 

@@ -1,7 +1,8 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests\ArtisanCreateRequest;
-
+use Auth;
+use App\Salon;
 use App\Repositories\ArtisanRepository;
 use App\Repositories\PhotoRepository;
 
@@ -17,8 +18,8 @@ class ArtisanController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('owner', ['except' => 'show']);
-        $this->middleware('admin', ['only' => 'index']);
         $this->middleware('confirmed', ['except' => 'show']);
+        $this->middleware('chose_salon', ['except' => 'show']);
 
         $this->artisanRepository = $artisanRepository;
     }
@@ -30,15 +31,7 @@ class ArtisanController extends Controller
      */
     public function index()
     {
-        $artisans = $this->artisanRepository->getPaginate($this->nbrPerPage);
-        $links = str_replace('/?', '?', $artisans->render());
-
-        return view('salon_configuration/artisans/index', compact('artisans', 'links'));
-    }
-
-    public function indexForOwnerSalons()
-    {
-        $artisans = $this->artisanRepository->getArtisansForOwnerSalons();
+        $artisans = Salon::find(session('salon_chosen'))->artisans;
         return view('salon_configuration/artisans/index', compact('artisans'));
     }
 
@@ -47,8 +40,9 @@ class ArtisanController extends Controller
      *
      * @return Response
      */
-    public function create($salon_id)
+    public function create()
     {
+        $salon_id = session('salon_chosen');
         return view('salon_configuration/artisans/create')->with(['salon_id' => $salon_id]);
     }
 
@@ -92,8 +86,10 @@ class ArtisanController extends Controller
     public function edit($id)
     {
         $artisan = $this->artisanRepository->getById($id);
-
-        return view('salon_configuration/artisans/edit', compact('artisan'));
+        if ($artisan->salon_id == session('salon_chosen')) {
+            return view('salon_configuration/artisans/edit', compact('artisan'));
+        }
+        return redirect('/');
     }
 
     /**
@@ -123,8 +119,10 @@ class ArtisanController extends Controller
      */
     public function destroy(PhotoRepository $photoRepository, $id)
     {
-        $this->artisanRepository->destroy($photoRepository, $id);
-
+        $artisan=$this->artisanRepository->getById($id);
+        if ($artisan->salon_id == session('salon_chosen')) {
+            $this->artisanRepository->destroy($photoRepository, $id);
+        }
         return redirect()->back();
     }
 
