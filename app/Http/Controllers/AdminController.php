@@ -20,7 +20,7 @@ class AdminController extends Controller
     }
     public function mainPage()
     {
-        return redirect()->action('SalonController@index');
+        return view('administration/administratorMain');
         //return response("Debut ok",200);
     }
     public function getForm()

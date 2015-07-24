@@ -34,7 +34,7 @@ Route::get('services-for-owner-salons', 'ServiceController@indexForOwnerSalons')
 Route::get('artisans-for-owner-salons', 'ArtisanController@indexForOwnerSalons');
 
 
-Route::get('administrator','AdminController@getForm');
+Route::get('administrator','AdminController@mainPage');
 Route::post('administrator','AdminController@postForm');
 Route::post('createsalon','SalonController@store');
 
