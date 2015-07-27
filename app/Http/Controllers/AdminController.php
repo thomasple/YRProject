@@ -8,10 +8,15 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\SalonCreationRequest;
 use App\Repositories\AdminCreationSalonRepositoryInterface;
+use App\Http\Requests\AdminUpdateRequest;
+use App\User;
+use Session;
+use Auth;
 use Illuminate\Routing\Redirector ;
 
 class AdminController extends Controller
 {
+    protected $nbrPerPage=10;
     public function __construct()
     {
         $this->middleware('auth');
@@ -21,17 +26,25 @@ class AdminController extends Controller
     public function mainPage()
     {
         return view('administration/administratorMain');
-        //return response("Debut ok",200);
     }
     public function getForm()
     {
         return redirect()->action('SalonController@index');
-        //return response("Debut ok",200);
     }
-    public function postForm(SalonCreationRequest $request,AdminCreationSalonRepositoryInterface $creation)
+
+    public function index()
     {
-        $sname=$request->input('salonName');
-        $creation->createSalon($sname);
-        return view('administration/administrationConfirmCreation')->with('name',$sname);
+        $users=User::all();
+        return view('administration/indexuser', compact('users'));
+    }
+
+
+    public function updateAdmin(AdminUpdateRequest $request,$id)
+    {
+        $user =User::find($id);
+        $user->admin=$request['admin'];
+        $user->save();
+        Session::forget('main_admin');
+        return redirect('administrators');
     }
 }
