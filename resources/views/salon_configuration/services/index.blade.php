@@ -46,7 +46,7 @@
             </tbody>
         </table>
         {!! link_to_route('service.create', 'Create new service', [], ['class' => 'btn btn-info pull-right']) !!}
-        <a href="javascript:history.back()" class="btn btn-primary">
+        <a href="{{ url('/owner/salon-configuration') }}" class="btn btn-primary">
             <span class="glyphicon glyphicon-circle-arrow-left"></span> Back
         </a>
     </div>

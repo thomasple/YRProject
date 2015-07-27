@@ -11,14 +11,15 @@
     {{ Html::style('https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js') }}
     {{ Html::style('https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js') }}
     <![endif]-->
-
+    <link rel='stylesheet'
+          href='//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css'/>
     <style> textarea {
             resize: none;
         } </style>
 </head>
 <body>
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal">X</button>
         <h1 style="text-align: center">@yield('modal_title')</h1>
     </div>
     <div class="modal-body">
