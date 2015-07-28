@@ -18,6 +18,9 @@ class SalonRepository
         if (isset($inputs['address'])) {
             $salon->address = $inputs['address'];
         }
+        if (isset($inputs['city'])) {
+            $salon->city = $inputs['city'];
+        }
         if (isset($inputs['description'])) {
             $salon->description = $inputs['description'];
         }
@@ -65,14 +68,32 @@ class SalonRepository
     public function destroy(PhotoRepository $photoRepository, $id)
     {
         $salon = $this->getById($id);
+        $user=User::find($salon->user_id);
+        if($user->salons()->count()-1==0){
+            $user->salon_owner=0;
+            $user->save();
+        }
         $photoRepository->delete_photo($salon->main_photo);
         foreach ($salon->artisans as $artisan) {
             $photoRepository->delete_photo($artisan->main_photo);
+            $artisan->services()->detach();
             $artisan->delete();
         }
         foreach ($salon->services as $service) {
             $service->delete();
         }
         $salon->delete();
+    }
+
+    public function updateSession(Salon $salon){
+        session(['salon_chosen' => $salon->id]);
+        session(['salon_chosen_name' => $salon->name]);
+        if (session()->has('nb_salons')) {
+            session(['nb_salons' => session('nb_salons') + 1]);
+        } else {
+            $user = User::find(Auth::user()->id);
+            $nb_salons = $user->salons()->count();
+            session(['nb_salons'=>$nb_salons]);
+        }
     }
 }

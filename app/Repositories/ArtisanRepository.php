@@ -70,6 +70,8 @@ class ArtisanRepository
     public function destroy(PhotoRepository $photoRepository, $id)
     {
         $photoRepository->delete_photo($this->getById($id)->main_photo);
-        $this->getById($id)->delete();
+        $artisan=$this->getById($id);
+        $artisan->services()->detach();
+        $artisan->delete();
     }
 }

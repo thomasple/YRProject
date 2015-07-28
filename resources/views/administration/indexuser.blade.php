@@ -37,9 +37,9 @@
                         <td>{{ $user->admin }}</td>
                         <td>
                             @if($user->admin)
-                                <a href="{{ url("/main_admin/0/".$user->id) }}" class="btn btn-warning btn-block">Cancel administrator rights</a>;
+                                <a href="{{ url("/main_admin/0/".$user->id) }}" class="btn btn-warning btn-block">Cancel administrator rights</a>
                             @else
-                                <a href="{{ url("/main_admin/1/".$user->id) }}" class="btn btn-success btn-block">Give administrator rights</a>;
+                                <a href="{{ url("/main_admin/1/".$user->id) }}" class="btn btn-success btn-block">Give administrator rights</a>
                             @endif
                     </tr>
                 @endif

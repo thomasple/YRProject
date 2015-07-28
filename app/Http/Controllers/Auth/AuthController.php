@@ -68,6 +68,7 @@ class AuthController extends Controller
             'email' => $data['email'],
             'phone' => $data['phone'],
             'password' => bcrypt($data['password']),
+            'salon_owner'=>$data['salon_owner']
         ]);
     }
 
@@ -75,6 +76,8 @@ class AuthController extends Controller
     {
         Session::forget('confirmed');
         Session::forget('salon_chosen');
+        Session::forget('nb_salons');
+        Session::forget('salon_chosen_name');
         return redirect('/');
     }
 }

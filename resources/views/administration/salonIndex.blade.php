@@ -40,7 +40,6 @@
             @endforeach
             </tbody>
         </table>
-        {!! link_to_route('salon.create', 'Create new salon', [], ['class' => 'btn btn-info pull-right']) !!}
         <a href="{{ url('/administrator') }}" class="btn btn-primary">
             <span class="glyphicon glyphicon-circle-arrow-left"></span> Back
         </a>

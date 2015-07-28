@@ -12,10 +12,15 @@
             {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name']) !!}
             {!! $errors->first('name', '<small class="help-block">:message</small>') !!}
         </div>
-        <div class="form-group {!! $errors->has('user_id') ? 'has-error' : '' !!}">
-            {!! Form::text('user_id', null, ['class' => 'form-control', 'placeholder' => 'Owner id']) !!}
-            {!! $errors->first('user_id', '<small class="help-block">:message</small>') !!}
+        <div class="form-group {!! $errors->has('city') ? 'has-error' : '' !!}">
+            {!! Form::text('city', null, ['class' => 'form-control', 'placeholder' => 'City']) !!}
+            {!! $errors->first('city', '<small class="help-block">:message</small>') !!}
         </div>
+        <div class="form-group {!! $errors->has('address') ? 'has-error' : '' !!}">
+            {!! Form::text('address', null, ['class' => 'form-control', 'placeholder' => 'Address']) !!}
+            {!! $errors->first('address', '<small class="help-block">:message</small>') !!}
+        </div>
+        {!! Form::hidden('user_id', $user_id) !!}
         {!! Form::submit('Confirm', ['class' => 'btn btn-info pull-right']) !!}
         {!! Form::close() !!}
         <a href="javascript:history.back()" class="btn btn-danger pull-left">
