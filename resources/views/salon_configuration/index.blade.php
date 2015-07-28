@@ -9,10 +9,12 @@
          id="register_body">
         <h1 style="text-align: center">{{ session('salon_chosen_name') }}</h1>
         <h1 style="text-align: center">Salon configuration</h1>
-
+        <br/>
         <div style="text-align: left">
-            <p style="text-align:center"><a href="{{ url('/artisan') }}" class="btn btn-primary">Configure artisans</a>
-            <a href="{{ url('/service') }}" class="btn btn-primary">Configure services</a></p>
+            <p style="text-align:center"><a href="{{ url('/salon/'.session('salon_chosen').'/edit') }}" class="btn btn-success btn-block">Edit salon properties</a></p>
+            <br/>
+            <p style="text-align:center"><a href="{{ url('/artisan') }}" class="btn btn-success btn-block">Configure artisans</a>
+            <a href="{{ url('/service') }}" class="btn btn-success btn-block">Configure services</a></p>
         </div>
     </div>
 @endsection

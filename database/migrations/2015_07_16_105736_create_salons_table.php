@@ -13,6 +13,7 @@ class CreateSalonsTable extends Migration
             $table->timestamps();
             $table->string('name', 100);
             $table->text('description');
+            $table->string('city', 100);
             $table->text('address');
             $table->time('open_hour')->default('08:00');
             $table->time('close_hour')->default('18:00');

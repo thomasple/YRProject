@@ -60,29 +60,30 @@
             @endforeach
             </tbody>
         </table>
-        <a href="{{ url('/service/'.$service->id) }}" class="btn btn-primary pull-left">
+        <a href="javascript:history.back()" class="btn btn-primary pull-left">
             <span class="glyphicon glyphicon-circle-arrow-left"></span> Back
         </a>
-        @endsection
+    </div>
+@endsection
 
-        @section('script')
-            <script type="text/javascript" charset="utf8"
-                    src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.js"></script>
-            <script type="text/javascript" charset="utf8"
-                    src="{{url('/vendor/jquery.dataTables.columnFilter.js')}}"></script>
-            <script src='//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js'></script>
+@section('script')
+    <script type="text/javascript" charset="utf8"
+            src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8"
+            src="{{url('/vendor/jquery.dataTables.columnFilter.js')}}"></script>
+    <script src='//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js'></script>
 
-            <script>
-                $(document).ready(function () {
-                    $('#table').dataTable({
-                        ordering: true
-                    }).columnFilter({
-                        aoColumns: [
-                            {type: "text"},
-                            {type: "text"},
-                            {type: "text"}
-                        ]
-                    });
-                });
-            </script>
+    <script>
+        $(document).ready(function () {
+            $('#table').dataTable({
+                ordering: true
+            }).columnFilter({
+                aoColumns: [
+                    {type: "text"},
+                    {type: "text"},
+                    {type: "text"}
+                ]
+            });
+        });
+    </script>
 @endsection

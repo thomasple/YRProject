@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-    <div class="jumbotron">
-        <div class="container">
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-6 col-sm-offset-3 col-xs-12"
+         id="register_body" style="text-align:left;">
             <h1>Welcome to YR Project!</h1>
 
             <p>Hello @if(Auth::user()) {{Auth::user()->first_name}} @else guest @endif !
@@ -17,6 +17,5 @@
                     You have chosen salon : {{ session('salon_chosen_name') }}
                 @endif
             </p>
-        </div>
     </div>
 @endsection

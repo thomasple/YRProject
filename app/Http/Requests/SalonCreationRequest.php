@@ -25,7 +25,9 @@ class SalonCreationRequest extends Request
     {
         return [
             'name' => 'required|max:100',
-            'user_id' => 'required|exists:users,id'
+            'user_id' => 'required|exists:users,id',
+            'city' => 'required|max:100',
+            'address' => 'required|max:255',
         ];
     }
 }

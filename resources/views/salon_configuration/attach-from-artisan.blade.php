@@ -46,7 +46,7 @@
                             <a class="btn btn-success btn-block attach"
                                onclick="$.get('{!! url('/attach-artisan-service/'.$artisan->id.'/'.$service->id) !!}', function (data) {
                                        if (data.response == 'ok') {
-                                      javascript:window.location.reload();
+                                       javascript:window.location.reload();
                                        }
                                        });">
                                 Attach</a>
@@ -65,10 +65,12 @@
             @endforeach
             </tbody>
         </table>
-        <a href="{{ url('/artisan/'.$artisan->id) }}" class="btn btn-primary pull-left">
+        <a href="javascript:history.back()" class="btn btn-primary pull-left">
             <span class="glyphicon glyphicon-circle-arrow-left"></span> Back
         </a>
     </div>
+
+    <div class="modal charging"></div>
 @endsection
 
 @section('script')
@@ -87,6 +89,13 @@
                     {type: "text"}
                 ]
             });
+        }).on({
+            ajaxStart: function () {
+                $('body').addClass("loading");
+            },
+            ajaxStop: function () {
+                $('body').removeClass("loading");
+            }
         });
     </script>
 @endsection

@@ -4,6 +4,7 @@ namespace Illuminate\Foundation\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Salon;
 
 trait RegistersUsers
 {
@@ -37,6 +38,23 @@ trait RegistersUsers
 
         Auth::login($this->create($request->all()));
 
+        if($request['salon_owner']){
+            $this->validate($request, [
+                'name' => 'required|max:100',
+                'city' => 'required|max:100',
+                'address' => 'required|max:255',
+            ]);
+            $salon = new Salon();
+            $salon->name = $request['name'];
+            $salon->user_id = Auth::user()->id;
+            $salon->address = $request['address'];
+            $salon->city = $request['city'];
+            $salon->main_photo = config('images.anonym');
+            $salon->save();
+            $salon_id = Salon::where('user_id', Auth::user()->id)->first()->id;
+            session(['confirmed' => true]);
+            return redirect('salon/'.$salon_id.'/edit');
+        }
         return redirect($this->redirectPath());
     }
 }

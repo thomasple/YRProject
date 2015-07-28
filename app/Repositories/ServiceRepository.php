@@ -64,6 +64,8 @@ class ServiceRepository
 
     public function destroy($id)
     {
-        $this->getById($id)->delete();
+        $service=$this->getById($id);
+        $service->artisans()->detach();
+        $service->delete();
     }
 }
