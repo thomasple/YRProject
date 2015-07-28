@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ArtisanService extends Model {
 
-	protected $table = 'artisans_services';
+	protected $table = 'artisan_service';
 
 	protected $fillable = array('artisan_id', 'service_id');
 

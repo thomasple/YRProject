@@ -37,6 +37,6 @@ class Kernel extends HttpKernel
 
         'main_admin'=>\App\Http\Middleware\MainAdmin::class,
 
-        'ajax' => \App\Http\Middleware\Ajax::class, upstream/master
+        'ajax' => \App\Http\Middleware\Ajax::class,
     ];
 }
