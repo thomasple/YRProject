@@ -39,12 +39,12 @@
             <tbody>
             @foreach($artisans_services as $artisan_service)
             <tr>
-                <td>{{$artisan_service['artisan']->first_name }} {{ Artisan::find($artisan_service->artisan_id)->last_name }}</td>
-                    <td>{{ $artisan_service['artisan']->email }}</td>
-                    <td>{{ $artisan_service['artisan']->sex }}</td>
-                    <td>{{ $artisan_service['artisan']->specialty }}</td>
-                    <td>{{ $artisan_service['service']->name }}</td>
-                    <td>{{ $artisan_service['artisan']->salon }}</td>
+                <td>{{$artisan_service->artisan->first_name }} {{ $artisan_service->artisan->last_name }}</td>
+                    <td>{{ $artisan_service->artisan->email }}</td>
+                    <td>{{ $artisan_service->artisan->sex }}</td>
+                    <td>{{ $artisan_service->artisan->specialty }}</td>
+                    <td>{{ $artisan_service->service->name }}</td>
+                    <td>{{ $artisan_service->artisan->salon->name }}</td>
                     {{--<td>{!! link_to_route('artisan.show', 'Show', [$artisan->id], ['class' => 'btn btn-success btn-block']) !!}</td>--}}
                     {{--<td>{!! link_to_route('artisan.edit', 'Edit', [$artisan->id], ['class' => 'btn btn-warning btn-block']) !!}</td>--}}
                     {{--<td>{!! Form::open(['method' => 'DELETE', 'route' => ['artisan.destroy', $artisan->id]]) !!}--}}

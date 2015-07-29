@@ -13,6 +13,7 @@ class PhotoRepository
                 $name = str_random(10) . '.' . $extension;
             } while (file_exists($path . '/' . $name));
             $photo->move($path, $name);
+            return response('photo valide placee en '.$name.".".$path);
             return $path . '/' . $name;
         }
         return false;

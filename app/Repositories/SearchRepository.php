@@ -3,7 +3,7 @@ namespace App\Repositories;
 use App\ArtisanService;
 use App\Artisan;
 use App\Service;
-
+use App\ArtisanServiceExplicit;
 class SearchRepository
 {
     public $artisans_services;
@@ -64,9 +64,10 @@ class SearchRepository
         {
             if($this->check($artisan_service))
             {
-                $res['artisan']=Artisan::find($artisan_service->artisan_id);
-                $res['service']=Service::find($artisan_service->service_id);
-                $res['artisan_service']=$artisan_service;
+                $res=new ArtisanServiceExplicit();
+                $res->artisan=Artisan::find($artisan_service->artisan_id);
+                $res->service=Service::find($artisan_service->service_id);
+                $res->artisan_service=$artisan_service;
                 array_push($results,$res);
             }
         }

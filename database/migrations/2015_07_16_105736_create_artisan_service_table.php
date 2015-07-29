@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateArtisansServicesTable extends Migration {
+class CreateArtisanServiceTable extends Migration {
 
 	public function up()
 	{
