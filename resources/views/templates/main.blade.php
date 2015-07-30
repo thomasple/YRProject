@@ -49,6 +49,9 @@
                     <a href="{{ url('/owner/salon-configuration') }}">Salon configuration</a>
                 </li>
             @endif
+            <li>
+                <a href="{{ url('/search') }}">Search service</a>
+            </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             @if(Auth::user())

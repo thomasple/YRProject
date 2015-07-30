@@ -53,3 +53,7 @@ Route::get('holiday/create/{n}', 'HolidayController@create')->where('n', '[0-9]+
 Route::get('/main_admin/{n}/{p}','MainAdminController@getMainAdmin')->where(['n','[0-1]'])->where(['p','[0-9]+']);
 Route::post('/main_admin','MainAdminController@postMainAdmin');
 Route::post('admin-update/{n}','AdminController@updateAdmin')->where('n', '[0-9]+');
+
+Route::get('search','SearchController@getForm');
+Route::post('search','SearchController@postForm');
+Route::get('search/artisanShow/{n}','SearchController@show')->where('n', '[0-9]+');

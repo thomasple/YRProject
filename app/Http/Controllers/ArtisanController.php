@@ -16,7 +16,7 @@ class ArtisanController extends Controller
 
     public function __construct(ArtisanRepository $artisanRepository)
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['except' => 'show']);
         $this->middleware('owner', ['except' => 'show']);
         $this->middleware('confirmed', ['except' => 'show']);
         $this->middleware('chose_salon', ['except' => 'show']);
