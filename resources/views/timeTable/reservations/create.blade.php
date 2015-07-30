@@ -11,19 +11,19 @@
 
         {!! $errors->first('artisan_service_id', '<small class="help-block">:message</small>') !!}
 
-        {!! Form::open(['url' => '/reservation']) !!}
+        {!! Form::open(['url' => '/reservation', 'class'=>'form_effect']) !!}
 
         {!! Form::hidden('artisan_service_id', $artisan_service_id) !!}
         <div class="form-group {!! $errors->has('start') ? 'has-error' : '' !!}">
-            {!! Form::input('datetime','start',\Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+            {!! Form::input('datetime','start',\Carbon\Carbon::now(), ['class' => 'form-control', 'required']) !!}
             {!! $errors->first('start', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('end') ? 'has-error' : '' !!}">
-            {!! Form::input('datetime','end', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+            {!! Form::input('datetime','end', \Carbon\Carbon::now(), ['class' => 'form-control', 'required']) !!}
             {!! $errors->first('end', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('client_id') ? 'has-error' : '' !!}">
-            {!! Form::text('client_id', null, ['class' => 'form-control', 'placeholder' => 'Client id', 'value' => old('client_id')]) !!}
+            {!! Form::text('client_id', null, ['class' => 'form-control', 'placeholder' => 'Client id', 'value' => old('client_id'), 'required']) !!}
             {!! $errors->first('client_id', '<small class="help-block">:message</small>') !!}
         </div>
 

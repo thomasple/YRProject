@@ -12,25 +12,29 @@
         <h1 style="text-align: center">{{ session('salon_chosen_name') }}</h1>
         <h1 style="text-align: center">Edit Artisan</h1>
 
-        {!! Form::model($artisan, ['route' => ['artisan.update', $artisan->id], 'files' => true, 'method'=>'put']) !!}
+        {!! Form::model($artisan, ['route' => ['artisan.update', $artisan->id], 'files' => true, 'method'=>'put', 'class'=>'form_effect']) !!}
         <div class="form-group {!! $errors->has('first_name') ? 'has-error' : '' !!}">
-            {!! Form::text('first_name', null, ['class' => 'form-control', 'placeholder' => 'Artisan\'s first name', 'value' => old('first_name')]) !!}
+            {!! Form::text('first_name', null, ['class' => 'form-control', 'placeholder' => 'Artisan\'s first name', 'value' => old('first_name'), 'required']) !!}
             {!! $errors->first('first_name', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('last_name') ? 'has-error' : '' !!}">
-            {!! Form::text('last_name', null, ['class' => 'form-control', 'placeholder' => 'Artisan\'s last name', 'value' => old('last_name')]) !!}
+            {!! Form::text('last_name', null, ['class' => 'form-control', 'placeholder' => 'Artisan\'s last name', 'value' => old('last_name'), 'required']) !!}
             {!! $errors->first('last_name', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('email') ? 'has-error' : '' !!}">
-            {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Artisan\'s email address', 'value' => old('email')]) !!}
+            {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Artisan\'s email address', 'value' => old('email'), 'required']) !!}
             {!! $errors->first('email', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('sex') ? 'has-error' : '' !!}">
-            Gender : {!! Form::select('sex', array('M' => 'Male', 'F' => 'Female'), old('sex')) !!}
+            <select name="sex">
+                <option selected disabled>Select Artisan's gender</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+            </select>
             {!! $errors->first('sex', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('specialty') ? 'has-error' : '' !!}">
-            {!! Form::textarea('specialty', null, ['class' => 'form-control', 'placeholder' => 'Artisan\'s specialty', 'value' => old('specialty')]) !!}
+            {!! Form::text('specialty', null, ['class' => 'form-control', 'placeholder' => 'Artisan\'s specialty', 'value' => old('specialty'), 'required']) !!}
             {!! $errors->first('specialty', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('description') ? 'has-error' : '' !!}">

@@ -34,11 +34,11 @@
             @foreach($services as $service)
                 <tr style="background-color:
                 @if(! in_array($service->id, $servicesAttachedToArtisan))
-                        red
+                        #d9534f
                 @else
-                        green
+                        #5cb85c
                 @endif
-                        ;" id="table{{ $artisan->id }}">
+                        ;">
                     <td>{{ $service->name }}</td>
                     <td>{{ $service->price }}</td>
                     <td>{{ $service->duration}} min</td>
@@ -70,7 +70,7 @@
         </a>
     </div>
 
-    <div class="modal charging"></div>
+    <div class="charging"></div>
 @endsection
 
 @section('script')
@@ -89,12 +89,10 @@
                     {type: "text"}
                 ]
             });
+            $('body').removeClass("loading");
         }).on({
             ajaxStart: function () {
                 $('body').addClass("loading");
-            },
-            ajaxStop: function () {
-                $('body').removeClass("loading");
             }
         });
     </script>

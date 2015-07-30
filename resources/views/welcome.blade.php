@@ -9,7 +9,7 @@
          id="register_body" style="text-align:left;">
             <h1>Welcome to YR Project!</h1>
 
-            <p>Hello @if(Auth::user()) {{Auth::user()->first_name}} @else guest @endif !
+            <p>Привет @if(Auth::user()) {{Auth::user()->first_name}} @else guest @endif!
                 @if(session()->has('confirmed') AND session('confirmed'))
                     You have confirmed your password.
                 @endif

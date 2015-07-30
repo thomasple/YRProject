@@ -12,21 +12,21 @@
 
         {!! $errors->first('salon_id', '<small class="help-block">:message</small>') !!}
 
-        {!! Form::model($service, ['route' => ['service.update', $service->id], 'method'=>'put']) !!}
+        {!! Form::model($service, ['route' => ['service.update', $service->id], 'method'=>'put', 'class'=>'form_effect']) !!}
 
         {!! Form::hidden('salon_id', $service->salon_id) !!}
 
         <div class="form-group {!! $errors->has('name') ? 'has-error' : '' !!}">
-            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Service\'s name', 'value' => old('name')]) !!}
+            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Service\'s name', 'value' => old('name'), 'required']) !!}
             {!! $errors->first('name', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('price') ? 'has-error' : '' !!}">
-            {!! Form::input('number', 'price', null, ['class' => 'form-control', 'placeholder' => 'Service\'s price (RUR)', 'value' => old('price')]) !!}
+            {!! Form::input('number', 'price', null, ['class' => 'form-control', 'placeholder' => 'Service\'s price (RUR)', 'value' => old('price'), 'required']) !!}
             {!! $errors->first('price', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('duration') ? 'has-error' : '' !!}">
             {!! Form::input('number', 'duration', null,
-                ['class' => 'form-control', 'placeholder' => 'Service\'s duration (multiples of 15 minutes)', 'value' => old('duration'), 'min'=>'15', 'step'=>'15']) !!}
+                ['class' => 'form-control', 'placeholder' => 'Service\'s duration (multiples of 15 minutes)', 'value' => old('duration'), 'min'=>'15', 'step'=>'15', 'required']) !!}
             {!! $errors->first('duration', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('description') ? 'has-error' : '' !!}">

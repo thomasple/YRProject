@@ -1,5 +1,5 @@
 /.idea
-/public/images/uploads
+/public/images/uploads/*
 /node_modules
 Homestead.yaml
 .env

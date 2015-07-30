@@ -11,15 +11,15 @@
 
         {!! $errors->first('artisan_id', '<small class="help-block">:message</small>') !!}
 
-        {!! Form::open(['url' => '/holiday']) !!}
+        {!! Form::open(['url' => '/holiday', 'class'=>'form_effect']) !!}
 
         {!! Form::hidden('artisan_id', $artisan_id) !!}
         <div class="form-group {!! $errors->has('start') ? 'has-error' : '' !!}">
-            {!! Form::input('datetime','start',\Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+            {!! Form::input('datetime','start',\Carbon\Carbon::now(), ['class' => 'form-control', 'required']) !!}
             {!! $errors->first('start', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('end') ? 'has-error' : '' !!}">
-            {!! Form::input('datetime','end', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+            {!! Form::input('datetime','end', \Carbon\Carbon::now(), ['class' => 'form-control', 'required']) !!}
             {!! $errors->first('end', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('description') ? 'has-error' : '' !!}">

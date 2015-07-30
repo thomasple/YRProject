@@ -9,7 +9,7 @@
 
     {!! Html::style('https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css') !!}
 		{!! Html::style('https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css') !!}
-		{!! Html::style('css/design.css') !!}
+		{!! Html::style('css/design_white.css') !!}
 		<!--[if lt IE 9]>
     {{ Html::style('https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js') }}
     {{ Html::style('https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js') }}
@@ -23,21 +23,21 @@
         }
 
         .charging {
-            background: rgba(0, 0, 0, .5) url({{ url('/images/ajax-loader.gif') }}) 50% 50% no-repeat;
+            background: rgba(0, 0, 0, .5) url("{{ url('/images/ajax-loader.gif') }}") 50% 50% no-repeat;
         }
     </style>
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-static-top">
+<nav class="navbar navbar-static-top">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="{{ url('/') }}">
-                <div>{!! Html::image('images/YRLogo.png') !!}</div>
+                <div>{!! Html::image('images/YRLogo.png', 'Logo', ['height'=>'27px']) !!}</div>
             </a>
         </div>
         <ul class="nav navbar-nav">
             <li>
-                <a href="{{ url('/') }}">Accueil</a>
+                <a href="{{ url('/') }}">Home</a>
             </li>
             @if(Auth::user() AND Auth::user()->admin)
                 <li>
@@ -61,9 +61,12 @@
                 <li><a href="{{ url('/auth/login') }}">Login <span
                                 class="glyphicon glyphicon glyphicon-hand-right"></span></a></li>
             @endif
+
         </ul>
+        {!! Html::image('images/separator.png', 'separator', ['width'=>'100.5%']) !!}
     </div>
 </nav>
+
 
 {{--@if(!Auth::user())
     <div class="login_roll"
@@ -80,6 +83,7 @@
 @endif
 
 <div class="body">
+
     @yield('content')
 </div>
 
@@ -98,7 +102,7 @@
             cursus
             imperdiet. Sed rhoncus erat nec blandit tempus.
             <ul id="footerUl" class="siteFooterSection">
-                <li role="contentinfo">&copy; 2015 YRProject, Inc. All rights reserved.</li>
+                <li role="contentinfo">&copy; 2015 BookUR, Inc. All rights reserved.</li>
                 <li><a href="#">FIND</a></li>
                 @if(Auth::user())
                     <li><a href="{{ url('/salon/create') }}">CREATE YOUR OWN BUSINESS</a></li>

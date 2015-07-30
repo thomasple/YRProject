@@ -30,9 +30,9 @@
             @foreach($artisans as $artisan)
                 <tr style="background-color:
                 @if(!in_array($artisan->id, $artisansAttachedToService))
-                        red
+                        #d9534f
                 @else
-                        green
+                        #5cb85c
                 @endif
                         ;">
                     <td>{{ $artisan->first_name }} {{ $artisan->last_name }}</td>
@@ -64,6 +64,8 @@
             <span class="glyphicon glyphicon-circle-arrow-left"></span> Back
         </a>
     </div>
+
+    <div class="charging"></div>
 @endsection
 
 @section('script')
@@ -84,6 +86,11 @@
                     {type: "text"}
                 ]
             });
+            $('body').removeClass("loading");
+        }).on({
+            ajaxStart: function () {
+                $('body').addClass("loading");
+            }
         });
     </script>
 @endsection

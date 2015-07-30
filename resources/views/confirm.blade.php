@@ -11,9 +11,9 @@ Login
 <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12"
      id="register_body">
     <p>You are trying to access to a configuration page. Please confirm your password first.</p>
-    {!! Form::open(['url' => '/confirm']) !!}
+    {!! Form::open(['url' => '/confirm', 'class'=>'form_effect']) !!}
     <div class="form-group {!! $errors->has('password') ? 'has-error' : '' !!}">
-        {!! Form::password ('password', ['class' => 'form-control', 'placeholder' => 'Password']) !!}
+        {!! Form::password ('password', ['class' => 'form-control', 'placeholder' => 'Password','required']) !!}
         {!! $errors->first('password', '<small class="help-block">:message</small>') !!}
     </div>
 

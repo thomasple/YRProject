@@ -7,17 +7,17 @@
          id="register_body">
         <h1 style="text-align: center">Create Salon</h1>
 
-        {!! Form::open(['url'=>'salon']) !!}
+        {!! Form::open(['url'=>'salon', 'class'=>'form_effect']) !!}
         <div class="form-group {!! $errors->has('name') ? 'has-error' : '' !!}">
-            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name']) !!}
+            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name','required']) !!}
             {!! $errors->first('name', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('city') ? 'has-error' : '' !!}">
-            {!! Form::text('city', null, ['class' => 'form-control', 'placeholder' => 'City']) !!}
+            {!! Form::text('city', null, ['class' => 'form-control', 'placeholder' => 'City','required']) !!}
             {!! $errors->first('city', '<small class="help-block">:message</small>') !!}
         </div>
         <div class="form-group {!! $errors->has('address') ? 'has-error' : '' !!}">
-            {!! Form::text('address', null, ['class' => 'form-control', 'placeholder' => 'Address']) !!}
+            {!! Form::text('address', null, ['class' => 'form-control', 'placeholder' => 'Address','required']) !!}
             {!! $errors->first('address', '<small class="help-block">:message</small>') !!}
         </div>
         {!! Form::hidden('user_id', $user_id) !!}

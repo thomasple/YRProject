@@ -23,12 +23,12 @@ class CreateForeignKeys extends Migration {
 						->onDelete('restrict')
 						->onUpdate('restrict');
 		});
-		Schema::table('artisans_services', function(Blueprint $table) {
+		Schema::table('artisan_service', function(Blueprint $table) {
 			$table->foreign('artisan_id')->references('id')->on('artisans')
 						->onDelete('restrict')
 						->onUpdate('restrict');
 		});
-		Schema::table('artisans_services', function(Blueprint $table) {
+		Schema::table('artisan_service', function(Blueprint $table) {
 			$table->foreign('service_id')->references('id')->on('services')
 						->onDelete('restrict')
 						->onUpdate('restrict');
@@ -49,7 +49,7 @@ class CreateForeignKeys extends Migration {
 						->onUpdate('restrict');
 		});
 		Schema::table('reservations', function(Blueprint $table) {
-			$table->foreign('artisan_service_id')->references('id')->on('artisans_services')
+			$table->foreign('artisan_service_id')->references('id')->on('artisan_service')
 						->onDelete('restrict')
 						->onUpdate('restrict');
 		});
@@ -71,11 +71,11 @@ class CreateForeignKeys extends Migration {
 		Schema::table('services', function(Blueprint $table) {
 			$table->dropForeign('services_salon_id_foreign');
 		});
-		Schema::table('artisans_services', function(Blueprint $table) {
-			$table->dropForeign('artisans_services_artisan_id_foreign');
+		Schema::table('artisan_service', function(Blueprint $table) {
+			$table->dropForeign('artisan_service_artisan_id_foreign');
 		});
-		Schema::table('artisans_services', function(Blueprint $table) {
-			$table->dropForeign('artisans_services_service_id_foreign');
+		Schema::table('artisan_service', function(Blueprint $table) {
+			$table->dropForeign('artisan_service_service_id_foreign');
 		});
 		Schema::table('time_slots', function(Blueprint $table) {
 			$table->dropForeign('time_slots_service_id_foreign');

@@ -28,7 +28,7 @@ class ArtisanCreateRequest extends Request
             'last_name' => 'required|max:100',
             'email' => 'required|email',
             'sex' => 'required|max:1',
-            'specialty' => 'required',
+            'specialty' => 'required|max:255',
             'main_photo' => 'image',
             'salon_id' => 'required|exists:salons,id',
         ];
