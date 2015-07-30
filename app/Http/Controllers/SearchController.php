@@ -27,24 +27,15 @@ class SearchController extends Controller
         $this->searchRepository->date=$request['date'];
         $this->searchRepository->beginning=$request['beginning'];
         $this->searchRepository->end=$request['end'];
-        $artisans_services = $this->searchRepository->index();
+        $artisans = $this->searchRepository->index();
         //$links = str_replace('/?', '?', $artisans_services->render());
         //return view('client/result', compact('artisans_services'));//, 'links'));
+        return view('client/result',compact('artisans'));
+    }
+    public function show($id)
+    {
+        $artisan = $this->searchRepository->getById($id);
 
-// Get the current page from the url if it's not set default to 1
-        $page = Input::get('page', 1);
-
-// Number of items per page
-        $perPage = 10;
-
-// Start displaying items from this number;
-        $offSet = ($page * $perPage) - $perPage; // Start displaying items from this number
-
-// Get only the items you need using array_slice (only get 10 items since that's what you need)
-        $itemsForCurrentPage = array_slice($artisans_services, $offSet, $perPage, true);
-
-// Return the paginator with only 10 items but with the count of all items and set the it on the correct page
-        $artisans_services= new LengthAwarePaginator($itemsForCurrentPage, count($artisans_services), $perPage, $page);
-        return view('client/result',compact('artisans_services'));
+        return view('client/showArtisan', compact('artisan'));
     }
 }

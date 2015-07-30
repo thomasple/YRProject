@@ -1,13 +1,13 @@
 @extends('templates/main')
 
 @section('title')
-    Salon configuration
+    Search results
 @endsection
 
 @section('content')
     <div id="register_body" style="text-align: left;">
         <h1 style="text-align: center">{{ session('salon_chosen_name') }}</h1>
-        <h1 style="text-align: center">List Artisans</h1>
+        <h1 style="text-align: center">Search results</h1>
 
         <table class="table table-condensed table-striped" id="table">
             <thead>
@@ -16,7 +16,6 @@
                 <th>Email</th>
                 <th>Gender</th>
                 <th>Specialty</th>
-                <th>Service</th>
                 <th>Salon</th>
                 <th></th>
                 <th></th>
@@ -29,7 +28,6 @@
                 <th>Email</th>
                 <th>Gender</th>
                 <th>Specialty</th>
-                <th>Service</th>
                 <th>Salon</th>
                 <th></th>
                 <th></th>
@@ -37,20 +35,14 @@
             </tr>
             </tfoot>
             <tbody>
-            @foreach($artisans_services as $artisan_service)
+            @foreach($artisans as $artisan)
             <tr>
-                <td>{{$artisan_service->artisan->first_name }} {{ $artisan_service->artisan->last_name }}</td>
-                    <td>{{ $artisan_service->artisan->email }}</td>
-                    <td>{{ $artisan_service->artisan->sex }}</td>
-                    <td>{{ $artisan_service->artisan->specialty }}</td>
-                    <td>{{ $artisan_service->service->name }}</td>
-                    <td>{{ $artisan_service->artisan->salon->name }}</td>
-                    {{--<td>{!! link_to_route('artisan.show', 'Show', [$artisan->id], ['class' => 'btn btn-success btn-block']) !!}</td>--}}
-                    {{--<td>{!! link_to_route('artisan.edit', 'Edit', [$artisan->id], ['class' => 'btn btn-warning btn-block']) !!}</td>--}}
-                    {{--<td>{!! Form::open(['method' => 'DELETE', 'route' => ['artisan.destroy', $artisan->id]]) !!}--}}
-                        {{--{!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block', 'onclick' => 'return confirm(\'Delete this artisan?\')']) !!}--}}
-                        {{--{!! Form::close() !!}</td>--}}
-                    <td></td>
+                <td>{{$artisan->first_name }} {{ $artisan->last_name }}</td>
+                    <td>{{ $artisan->email }}</td>
+                    <td>{{ $artisan->sex }}</td>
+                    <td>{{ $artisan->specialty }}</td>
+                    <td>{{ $artisan->salon->name }}</td>
+                    <td><a href="{{ url('search/artisanShow/'.$artisan->id) }}" class="btn btn-success btn-block">Show</a>
                     <td></td>
                     <td></td>
                 </tr>

@@ -56,3 +56,4 @@ Route::post('admin-update/{n}','AdminController@updateAdmin')->where('n', '[0-9]
 
 Route::get('search','SearchController@getForm');
 Route::post('search','SearchController@postForm');
+Route::get('search/artisanShow/{n}','SearchController@show')->where('n', '[0-9]+');

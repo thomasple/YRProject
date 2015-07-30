@@ -17,7 +17,7 @@ class ServiceController extends Controller
 
     public function __construct(ServiceRepository $serviceRepository)
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['except' => 'show']);
         $this->middleware('owner', ['except' => 'show']);
         $this->middleware('confirmed', ['except' => 'show']);
         $this->middleware('chose_salon', ['except' => 'show']);
