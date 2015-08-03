@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-6 col-sm-offset-3 col-xs-12" id="register_body">
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-12 col-xs-12" id="register_body">
         <h1 style="text-align: center">Edit Time Slot</h1>
         {!! Form::model($timeslot, ['route' => ['timeslot.update', $timeslot->id], 'method'=>'put', 'class'=>'form_effect']) !!}
 

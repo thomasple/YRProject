@@ -16,8 +16,8 @@ class OwnerController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('owner');
-        $this->middleware('confirmed');
         $this->middleware('chose_salon');
+        $this->middleware('confirmed');
         $this->middleware('ajax', ['only'=>['attachArtisanService', 'detachArtisanService']]);
     }
 

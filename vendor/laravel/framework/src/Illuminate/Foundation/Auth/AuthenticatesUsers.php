@@ -49,6 +49,11 @@ trait AuthenticatesUsers
         $credentials = $this->getCredentials($request);
 
         if (Auth::attempt($credentials, $request->has('remember'))) {
+            session(['nb_salons'=>Auth::user()->salons()->count()]);
+            if(session('nb_salons'==1)){
+                $salon = Auth::user()->salons()->first();
+                session(['salon_chosen'=>$salon->id, 'salon_chosen_name'=>$salon->name]);
+            }
             return $this->handleUserWasAuthenticated($request, $throttles);
         }
 

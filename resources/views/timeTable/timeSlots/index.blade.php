@@ -16,6 +16,7 @@ TimeSlots
                 <th>Artisan ID</th>
                 <th>Service ID</th>
                 <th></th>
+
                 <th></th>
                 <th></th>
             </tr>
@@ -61,7 +62,7 @@ TimeSlots
     <script>
         $(document).ready(function () {
             $('#table').dataTable({
-                ordering: false
+                ordering: true
             }).columnFilter({
                 aoColumns: [
                     {type: "select", values: ['Mo', 'Tu', 'We','Th','Fr','Sa','Su']},

@@ -56,7 +56,7 @@
     <script>
         $(document).ready(function () {
             $('#table').dataTable({
-                ordering: false
+                ordering: true
             }).columnFilter({
                 aoColumns: [
                     {type: "text"},

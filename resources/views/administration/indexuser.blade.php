@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div id="register_body" style="text-align: left;">
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-12 col-xs-12" id="register_body" style="text-align: left;">
         <h1 style="text-align: center">List Users</h1>
 
         <table class="table table-condensed table-striped" id="table">

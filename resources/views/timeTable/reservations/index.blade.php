@@ -5,49 +5,49 @@
 @endsection
 
 @section('content')
-<div id="register_body" style="text-align: left;">
-    <h1 style="text-align: center">List Reservations</h1>
+    <div id="register_body" style="text-align: left;">
+        <h1 style="text-align: center">List Reservations</h1>
 
-    <table class="table table-condensed table-striped" id="table">
-        <thead>
-        <tr>
-            <th>Start</th>
-            <th>End</th>
-            <th>Client ID</th>
-            <th>Artisan-Service ID</th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tfoot>
-        <tr>
-            <th>Start</th>
-            <th>End</th>
-            <th>Client ID</th>
-            <th>Artisan-Service ID</th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        </tfoot>
-        <tbody>
-        @foreach($reservations as $reservation)
-        <tr>
-            <td>{{ $reservation->start }}</td>
-            <td>{{ $reservation->end }}</td>
-            <td>{{ $reservation->client_id }}</td>
-            <td>{{ $reservation->artisan_service_id }}</td>
-            <td>{!! link_to_route('reservation.show', 'Show', [$reservation->id], ['class' => 'btn btn-success btn-block']) !!}</td>
-            <td>{!! link_to_route('reservation.edit', 'Edit', [$reservation->id], ['class' => 'btn btn-warning btn-block']) !!}</td>
-            <td>{!! Form::open(['method' => 'DELETE', 'route' => ['reservation.destroy', $reservation->id]]) !!}
-                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block', 'onclick' => 'return confirm(\'Delete this reservation?\')']) !!}
-                {!! Form::close() !!}</td>
-        </tr>
-        @endforeach
-        </tbody>
-    </table>
-</div>
+        <table class="table table-condensed table-striped" id="table">
+            <thead>
+            <tr>
+                <th>Start</th>
+                <th>End</th>
+                <th>Client ID</th>
+                <th>Artisan-Service ID</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <th>Start</th>
+                <th>End</th>
+                <th>Client ID</th>
+                <th>Artisan-Service ID</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </tfoot>
+            <tbody>
+            @foreach($reservations as $reservation)
+                <tr>
+                    <td>{{ $reservation->start }}</td>
+                    <td>{{ $reservation->end }}</td>
+                    <td>{{ $reservation->client_id }}</td>
+                    <td>{{ $reservation->artisan_service_id }}</td>
+                    <td>{!! link_to_route('reservation.show', 'Show', [$reservation->id], ['class' => 'btn btn-success btn-block']) !!}</td>
+                    <td>{!! link_to_route('reservation.edit', 'Edit', [$reservation->id], ['class' => 'btn btn-warning btn-block']) !!}</td>
+                    <td>{!! Form::open(['method' => 'DELETE', 'route' => ['reservation.destroy', $reservation->id]]) !!}
+                        {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block', 'onclick' => 'return confirm(\'Delete this reservation?\')']) !!}
+                        {!! Form::close() !!}</td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection
 
 @section('script')
@@ -59,7 +59,7 @@
     <script>
         $(document).ready(function () {
             $('#table').dataTable({
-                ordering: false
+                ordering: true
             }).columnFilter({
                 aoColumns: [
                     {type: "text"},

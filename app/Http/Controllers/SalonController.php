@@ -21,10 +21,10 @@ class SalonController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('admin', ['only' => ['index']]);
-        $this->middleware('confirmed');
         if (!Auth::user()->admin) {
             $this->middleware('chose_salon', ['only' => ['edit', 'update', 'destroy']]);
         }
+        $this->middleware('confirmed');
         $this->salonRepository = $salonRepository;
     }
 
@@ -148,6 +148,8 @@ class SalonController extends Controller
             }
             $this->salonRepository->destroy($photoRepository, $id);
             Session::forget('salon_chosen');
+            Session::forget('salon_chosen_name');
+            session(['nb_salons'=>session('nb_salons')-1]);
             return redirect('owner/salon-configuration');
         }
         $this->salonRepository->destroy($photoRepository, $id);

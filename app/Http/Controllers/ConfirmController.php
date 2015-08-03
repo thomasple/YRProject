@@ -10,6 +10,8 @@ use Session;
 use App\Http\Requests;
 use App\Http\Requests\ConfirmRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
 
 class ConfirmController extends Controller
 {
@@ -52,8 +54,8 @@ class ConfirmController extends Controller
     {
         $salon = Salon::find($salon_id);
         if ($salon->user_id == Auth::user()->id) {
-            session(['salon_chosen' => $salon->id, 'salon_chosen_name'=>$salon->name]);
-            return redirect()->intended('/');
+            session(['salon_chosen' => $salon->id, 'salon_chosen_name'=>$salon->name, 'nb_salons'=>Auth::user()->salons()->count()]);
+            return redirect()->intended(URL::previous() . '#admin_panel');
         } else {
             return redirect('/');
         }
